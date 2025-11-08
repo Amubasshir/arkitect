@@ -1,6 +1,9 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projectData = [
   {
@@ -9,9 +12,7 @@ const projectData = [
     description:
       'A flowing, organic design inspired by the movement and rhythm of the sea.',
     image:
-      'https://images.unsplash.com/photo-1549298492-263a2a0d7f54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['COMMERCIAL', 'BERLIN'],
-    theme: 'light',
+      'https://cdn.prod.website-files.com/634e3ae6f7e03279e55e7fbf/635d01bd4cc38fdedd93b2dc_project-ocean-wave-preview.webp',
   },
   {
     id: 2,
@@ -19,9 +20,7 @@ const projectData = [
     description:
       'A bold, modular design redefining vertical living with dynamic, interlocking structures.',
     image:
-      'https://images.unsplash.com/photo-1549419137-a12866e4a2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['RESIDENTIAL', 'NEW YORK'],
-    theme: 'dark',
+      'https://cdn.prod.website-files.com/634e3ae6f7e03279e55e7fbf/635d01b397c2631f080eb397_project-puzzle-tower-preview.webp',
   },
   {
     id: 3,
@@ -29,9 +28,7 @@ const projectData = [
     description:
       'A fusion of complex structure featuring a honeycomb design for beauty and efficiency.',
     image:
-      'https://images.unsplash.com/photo-1522294721184-b0a68d87b3e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['RESIDENTIAL', 'LONDON'],
-    theme: 'light',
+      'https://cdn.prod.website-files.com/634e3ae6f7e03279e55e7fbf/635d01a7bc9d9c2938d9f1cd_project-honey-comb-preview.webp',
   },
   {
     id: 4,
@@ -39,94 +36,89 @@ const projectData = [
     description:
       'A vibrant architectural statement blending modern aesthetics with captivating design.',
     image:
-      'https://images.unsplash.com/photo-1555776269-e72e11894d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['COMMERCIAL', 'TOKYO'],
-    theme: 'dark',
+      'https://cdn.prod.website-files.com/634e3ae6f7e03279e55e7fbf/635af1d8c41c46f3de66599d_project-waves-house-preview.webp',
   },
 ];
 
-// Reusable component for a single Project Card (Now using motion.div)
-const FullWidthProjectCard = ({ project }) => {
-  const { title, description, image, tags, theme } = project;
-  const textColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
-  const tagTextColor = theme === 'dark' ? 'text-gray-300' : 'text-gray-700';
-  const tagBorderColor =
-    theme === 'dark' ? 'border-gray-500' : 'border-gray-400';
-  const buttonBgColor = theme === 'dark' ? 'bg-white' : 'bg-gray-800';
-  const buttonTextColor = theme === 'dark' ? 'text-gray-800' : 'text-white';
+export default function ShowcaseGSAP() {
+  const containerRef = useRef(null);
 
+  // useEffect(() => {
+  //   const sections = containerRef.current.querySelectorAll('.pin-card');
+
+  //   sections.forEach(section => {
+  //     ScrollTrigger.create({
+  //       trigger: section,
+  //       start: 'top top',
+  //       end: '+=100%',
+  //       pin: true,
+  //       pinSpacing: false,
+  //       scrub: true,
+  //     });
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    const sections = gsap.utils.toArray('.pin-card');
+
+    sections.forEach(section => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: '+=100%',
+        pin: true,
+        pinSpacing: false,
+        scrub: true,
+      });
+    });
+
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+  }, []);
   return (
-    // Framer Motion Animation Setup
-    <motion.div
-      initial={{ opacity: 0, y: 50 }} // Start below and invisible
-      whileInView={{ opacity: 1, y: 0 }} // Animate to full visibility and normal position when in view
-      viewport={{ once: true, amount: 0.3 }} // Animate only once, when 30% of the card is visible
-      transition={{ duration: 0.8, ease: 'easeOut' }} // Smooth animation
-      className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[80vh] overflow-hidden rounded-[30px] shadow-lg group"
-    >
-      {/* Background Image (right side) */}
-      <img
-        src={image}
-        alt={title}
-        className="absolute right-0 top-0 h-full w-2/3 object-cover object-center"
-      />
+    <div ref={containerRef}>
+      {projectData.map(project => (
+        <div
+          key={project.id}
+          className="pin-card relative w-full h-screen sm:h-[90vh] overflow-hidden rounded-[60px]"
+        >
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 text-white ">
+            <div className="flex flex-col h-full w-full p-8 sm:p-16 lg:p-24 justify-between">
+              {/* Top Section */}
+              <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
+                <div className="max-w-full sm:max-w-md">
+                  <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-4 tracking-tight uppercase text-gray-100 leading-tight">
+                    {project.title}
+                  </h2>
+                  <p className="text-sm sm:text-base md:text-lg font-light max-w-xs text-gray-300">
+                    {project.description}
+                  </p>
+                </div>
+              </div>
 
-      {/* Overlay for gradient and content (left side) */}
-      <div
-        className={`absolute left-0 top-0 h-full w-full md:w-2/3 lg:w-3/5 xl:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-between
-                      ${
-                        theme === 'dark'
-                          ? 'bg-gradient-to-r from-black/60 via-black/30 to-transparent'
-                          : 'bg-gradient-to-r from-gray-900/60 via-gray-900/30 to-transparent'
-                      }`}
-      >
-        {/* Title and Description */}
-        <div className="flex flex-col justify-start">
-          <h2
-            className={`text-4xl md:text-5xl lg:text-6xl font-serif font-bold ${textColor} mb-4 leading-tight`}
-          >
-            {title}
-          </h2>
-          <p className={`text-lg md:text-xl ${textColor} max-w-md`}>
-            {description}
-          </p>
+              {/* Bottom Section */}
+              <div className="flex justify-between items-end flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
+                <div className="flex space-x-2 text-[8px] sm:text-[10px] font-semibold flex-wrap gap-2">
+                  <span className="px-3 py-1 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer">
+                    COMMERCIAL
+                  </span>
+                  <span className="px-3 py-1 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer">
+                    BERLIN
+                  </span>
+                </div>
+
+                <div className="px-4 py-2 sm:px-5 sm:py-3 border border-white rounded-full text-[16px] sm:text-[10px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white/20 hover:bg-white/30 transition text-black">
+                  EXPLORE
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Bottom Left: Tags */}
-        <div className="flex flex-wrap gap-3 mt-auto">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className={`px-4 py-2 rounded-full border ${tagBorderColor} ${tagTextColor} text-xs uppercase tracking-wider font-semibold`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Explore Button (bottom right) */}
-        <div className="absolute bottom-8 right-8">
-          <button
-            className={`px-8 py-4 rounded-full ${buttonBgColor} ${buttonTextColor} font-semibold text-lg hover:scale-105 transition-transform duration-300 z-10`}
-          >
-            EXPLORE
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-export default function FullWidthProjectCards() {
-  return (
-    <section className="bg-white py-20 px-4 sm:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto space-y-8 md:space-y-12">
-        {' '}
-        {/* Gaps between cards */}
-        {projectData.map(project => (
-          <FullWidthProjectCard key={project.id} project={project} />
-        ))}
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

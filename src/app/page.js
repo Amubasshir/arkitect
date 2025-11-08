@@ -12,11 +12,11 @@ import TeamSection from '@/Components/TeamSection';
 export default function HomePage() {
   return (
     <>
-      <div>
-        <div className="">
+      <div className="bg-gray-900 -z-40">
+        <div className="relative ">
           <Navbar></Navbar>
         </div>
-        <div className="">
+        <div className="absolute -mt-10 z-10 bg-gray-900">
           <ServicesSection></ServicesSection>
           <ProjectCards></ProjectCards>
           <StatisticsSection></StatisticsSection>

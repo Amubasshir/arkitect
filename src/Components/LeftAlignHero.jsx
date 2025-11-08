@@ -9,14 +9,14 @@ const backgroundImage = {
 export default function LeftAlignHero() {
   return (
     // Set min-h-screen for full height view
-    <section className="relative w-full min-h-screen bg-gray-900 overflow-hidden rounded-t-[60px]">
+    <section className="relative w-full min-h-screen bg-gray-900 overflow-hidden ">
       {/* 1. Background Image */}
       <img
         src={backgroundImage.url}
         alt={backgroundImage.alt}
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/60 rounded-t-[60px]"></div>
+      <div className="absolute inset-0 bg-black/60 "></div>
 
       <div className="absolute inset-0 bg-blue-700/50 mix-blend-multiply"></div>
 

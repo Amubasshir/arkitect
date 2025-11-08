@@ -3,9 +3,9 @@ import React from 'react';
 export default function CtaSection() {
   return (
     // Outer container for padding and background
-    <section className="bg-white py-20 px-4 sm:px-8 lg:px-16">
+    <section className="bg-white rounded-b-[30px] py-20 px-4 sm:px-8 lg:px-16">
       {/* Inner container with max-width, auto margin for centering, and rounded corners */}
-      <div className="max-w-7xl mx-auto bg-gray-50 p-10 md:p-20 rounded-[30px] shadow-lg flex flex-col items-center justify-center text-center">
+      <div className="flex flex-col items-center justify-center text-center">
         {/* Subtitle */}
         <p className="text-sm uppercase tracking-[0.2em] font-medium text-gray-600 mb-6">
           CONTACT

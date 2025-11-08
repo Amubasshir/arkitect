@@ -47,7 +47,7 @@ const StatCard = ({ stat }) => {
 export default function StatisticsSection() {
   return (
     <section className="bg-white py-20 px-4 sm:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12 mt-[600px]">
         {/* 1. Left Column: Title and Description */}
         <div className="lg:col-span-1 flex flex-col justify-start pt-4 lg:pr-10">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6 leading-tight">
