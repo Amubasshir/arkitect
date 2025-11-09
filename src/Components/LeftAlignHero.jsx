@@ -26,7 +26,7 @@ export default function LeftAlignHero() {
       <div className="relative z-10 w-full h-full min-h-screen flex flex-col justify-end pb-20 px-8 sm:px-16 lg:px-24">
         <div className="max-w-4xl text-white">
           {/* Main Title */}
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold leading-tight mb-6 tracking-tight">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-tight mb-6 tracking-tight">
             INNOVATIVE <br />
             DESIGN
           </h1>

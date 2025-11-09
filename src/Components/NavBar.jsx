@@ -1,15 +1,238 @@
 'use client';
-import { useState, useRef } from 'react';
+
+import { useState, useRef, useEffect } from 'react';
+
 import { FiChevronDown, FiMenu } from 'react-icons/fi';
+
 import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Import ScrollTrigger
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Pages dropdown
-  const [cartOpen, setCartOpen] = useState(false); // Cart popup
-  const [cartItems] = useState([]); // Cart items count
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Mobile menu
-  const dropdownTimeout = useRef(null); // Ref to store timeout ID
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems] = useState([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
+  const targetDivRef = useRef(null);
+  const headerRef = useRef(null); // Keep this if you use the scroll effect
+  const cursorRef = useRef(null);
 
+  const pulseTweenRef = useRef(null);
+
+  // useEffect(() => {
+  //   const cursor = cursorRef.current;
+  //   if (!cursor) return;
+
+  //   document.body.style.cursor = 'none';
+
+  //   const pos = { x: window.innerWidth / 6, y: window.innerHeight / 6 };
+  //   const actual = { x: pos.x, y: pos.y };
+  //   const setCursorX = gsap.quickSetter(cursor, 'x', 'px');
+  //   const setCursorY = gsap.quickSetter(cursor, 'y', 'px');
+
+  //   const moveCursor = e => {
+  //     pos.x = e.clientX;
+  //     pos.y = e.clientY;
+
+  //   };
+
+  //   const animateCursor = () => {
+  //     const damp = 0.2;
+  //     actual.x += (pos.x - actual.x) * damp;
+  //     actual.y += (pos.y - actual.y) * damp;
+
+  //     setCursorX(actual.x);
+  //     setCursorY(actual.y);
+  //   };
+
+  //   const handleHover = e => {
+  //     const isInteractive = e.target.closest(
+  //       'a, button, [role="button"], .cursor-pointer, li, svg'
+  //     );
+
+  //     if (isInteractive) {
+  //       if (!pulseTweenRef.current) {
+  //         pulseTweenRef.current = gsap.to(cursor, {
+  //           scale: 0,
+  //           backgroundColor: '#fff',
+  //           color: '#000',
+
+  //           duration: 0.25,
+  //           ease: 'power2.out',
+  //         });
+  //       } else {
+  //         pulseTweenRef.current.play();
+  //       }
+  //     } else {
+  //       if (pulseTweenRef.current) {
+  //         // Reset to default look (white background, black text)
+  //         pulseTweenRef.current.reverse();
+  //       }
+  //     }
+  //   };
+  //   // Initial big size
+  //   gsap.set(cursor, {
+  //     scale: 1.1,
+  //     backgroundColor: '#000',
+  //   });
+
+  //   gsap.ticker.add(animateCursor);
+  //   window.addEventListener('mousemove', moveCursor);
+  //   window.addEventListener('mouseover', handleHover);
+
+  //   return () => {
+  //     window.removeEventListener('mousemove', moveCursor);
+  //     window.removeEventListener('mouseover', handleHover);
+  //     gsap.ticker.remove(animateCursor);
+  //     document.body.style.cursor = 'default';
+  //   };
+  // }, []);
+
+  // ... (Component state and refs unchanged) ...
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    const header = headerRef.current; // headerRef টার্গেট করুন
+
+    if (!cursor || !header) return;
+
+    // --- SETUP & INIT ---
+    document.body.style.cursor = 'none';
+
+    // ইনিশিয়াল পজিশন স্ক্রিনের বাইরে রাখুন
+    const pos = { x: -9999, y: -9999 };
+    const actual = { x: -9999, y: -9999 };
+
+    const setCursorX = gsap.quickSetter(cursor, 'x', 'px');
+    const setCursorY = gsap.quickSetter(cursor, 'y', 'px');
+
+    // Initial style for the "Scroll" text cursor (শুরুতে অদৃশ্য)
+    gsap.set(cursor, {
+      scale: 1.1,
+      backgroundColor: '#000',
+      opacity: 0, // শুরুতে অদৃশ্য রাখুন
+      x: -9999,
+      y: -9999,
+    });
+
+    // --- MOUSE MOVEMENT LOGIC (Lag/Follow) ---
+    const moveCursor = e => {
+      // e.clientX/Y ব্যবহার করে পুরো স্ক্রিনে মাউসের অবস্থান ট্র্যাক করুন
+      pos.x = e.clientX;
+      pos.y = e.clientY;
+    };
+
+    const animateCursor = () => {
+      const damp = 0.2;
+      actual.x += (pos.x - actual.x) * damp;
+      actual.y += (pos.y - actual.y) * damp;
+
+      setCursorX(actual.x);
+      setCursorY(actual.y);
+    };
+
+    // --- HOVER LOGIC (Cursor Hide + Text Slide) ---
+    const handleHover = e => {
+      const isInteractive = e.target.closest(
+        'a, button, [role="button"], .cursor-pointer, li, svg'
+      );
+
+      const resetTarget = e.target.closest(
+        'li, a, button, [role="button"], .cursor-pointer, svg'
+      );
+
+      if (isInteractive) {
+        // 1. কাস্টম কার্সার অদৃশ্য করার লজিক
+        if (!pulseTweenRef.current) {
+          pulseTweenRef.current = gsap.to(cursor, {
+            scale: 0,
+            backgroundColor: '#fff',
+            color: '#000',
+            duration: 0.25,
+            ease: 'power2.out',
+          });
+        } else {
+          pulseTweenRef.current.play();
+        }
+
+        // 2. টেক্সট স্লাইড লজিক (LI ট্যাগগুলির জন্য)
+        if (isInteractive.tagName === 'LI') {
+          gsap.to(isInteractive, {
+            x: 8,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+        }
+      } else {
+        // --- রিসেট লজিক ---
+        if (pulseTweenRef.current) {
+          pulseTweenRef.current.reverse();
+        }
+
+        if (resetTarget) {
+          gsap.to(resetTarget, {
+            x: 0,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+        }
+      }
+    };
+
+    // --- BOUNDARY LOGIC ---
+
+    // যখন কার্সার টার্গেট Div-এ প্রবেশ করে
+    const handleMouseEnter = e => {
+      // কার্সারকে দৃশ্যমান করুন
+      gsap.to(cursor, { opacity: 1, duration: 0.3 });
+
+      // কার্সারকে মাউসের প্রাথমিক অবস্থানে সেট করুন
+      pos.x = e.clientX;
+      pos.y = e.clientY;
+    };
+
+    // যখন কার্সার টার্গেট Div-এর বাইরে চলে যায়
+    const handleMouseLeave = () => {
+      // কার্সারকে অদৃশ্য করুন
+      gsap.to(cursor, { opacity: 0, duration: 0.3 });
+
+      // pos এবং actual উভয়কেই স্ক্রিনের বাইরে রাখুন, যাতে এটি নড়াচড়া না করে
+      pos.x = -9999;
+      pos.y = -9999;
+      actual.x = -9999;
+      actual.y = -9999;
+
+      // ডিফল্ট কার্সারকে ফিরিয়ে আনুন
+      document.body.style.cursor = 'default';
+
+      // হোভার অ্যানিমেশন বন্ধ করুন
+      if (pulseTweenRef.current) pulseTweenRef.current.reverse();
+    };
+
+    // --- EVENT LISTENERS & CLEANUP ---
+    gsap.ticker.add(animateCursor);
+
+    // উইন্ডো নয়, হেডার এলিমেন্টের উপর লিসেনার যোগ করুন:
+    header.addEventListener('mousemove', moveCursor);
+    header.addEventListener('mouseover', handleHover);
+    header.addEventListener('mouseenter', handleMouseEnter);
+    header.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      gsap.ticker.remove(animateCursor);
+      document.body.style.cursor = 'default'; // আনমাউন্টের সময় ডিফল্ট কার্সার নিশ্চিত করুন
+      if (pulseTweenRef.current) pulseTweenRef.current.kill();
+
+      // হেডার থেকে ইভেন্ট লিসেনারগুলো সরিয়ে ফেলুন
+      header.removeEventListener('mousemove', moveCursor);
+      header.removeEventListener('mouseover', handleHover);
+      header.removeEventListener('mouseenter', handleMouseEnter);
+      header.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
   const handleMouseEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);
@@ -20,125 +243,109 @@ export default function Header() {
   };
 
   const NavPillContent = () => (
-    <nav className=" flex items-center bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg relative font-satoshi lg:space-x-8 md:justify-between w-auto ">
-      {/* Left Links */}
+    <nav className="flex items-center bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg relative font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible">
+      {/* ... (rest of NavPillContent JSX remains the same) ... */}
       <ul className="hidden lg:flex items-center space-x-6 text-sm font-medium">
         <li className="hover:text-yellow-400 cursor-pointer">Projects</li>
         <li className="hover:text-yellow-400 cursor-pointer">Services</li>
         <li className="hover:text-yellow-400 cursor-pointer">About</li>
       </ul>
-
-      {/* Right Icons / Dropdown */}
       <div className="flex items-center gap-4 ml-auto md:ml-0">
-        {/* Pages Dropdown */}
         <div
           className="relative hidden md:flex cursor-pointer"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <span className="flex items-center gap-1 hover:text-yellow-400 ,md:justify-end">
+          <span className="flex items-center gap-1 hover:text-yellow-400">
             Pages <FiChevronDown size={14} />
           </span>
 
           <div
-            className={`absolute left-1/2 -translate-x-1/2 top-full mt-4 bg-[#121212] rounded-[30px] shadow-2xl text-sm transition-all duration-200 ease-out ${
+            className={`absolute w-52 -translate-x-1/2 top-full mt-4 bg-[#121212] rounded-[30px] shadow-2xl text-sm transition-all duration-200 ease-out ${
               dropdownOpen
                 ? 'opacity-100 visible translate-y-0'
                 : 'opacity-0 invisible -translate-y-6'
-            } w-[90vw] max-w-[700px]`}
+            } w-[45vw] max-w-[700px]`}
           >
+            {/* Dropdown content */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 py-6 sm:px-12 sm:py-8 lg:px-16 lg:py-10">
-              {/* Column 1 */}
               <div>
                 <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
                   Pages
                 </h3>
                 <ul className="space-y-2">
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Home
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Projects
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Projects Single
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Services
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    About
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Career
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Contact
-                  </li>
+                  {[
+                    'Home',
+                    'Projects',
+                    'Projects Single',
+                    'Services',
+                    'About',
+                    'Career',
+                    'Contact',
+                  ].map(item => (
+                    <li
+                      key={item}
+                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
+                    >
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
-              {/* Column 2 */}
+
               <div>
                 <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
                   Pages
                 </h3>
                 <ul className="space-y-2">
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Blog
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Blog Post
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Shop
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Shop Single
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer font-semibold underline hover:translate-x-2 transition-transform duration-200 ">
+                  {['Blog', 'Blog Post', 'Shop', 'Shop Single'].map(item => (
+                    <li
+                      key={item}
+                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                  <li className="hover:text-yellow-400 cursor-pointer font-semibold underline transition-all duration-300 transform hover:translate-x-2">
                     More Templates
                   </li>
                 </ul>
               </div>
-              {/* Column 3 */}
+
               <div>
                 <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
                   Utility Pages
                 </h3>
                 <ul className="space-y-2">
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    404 Error Page
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Password Protected
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Styleguide
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Licensing
-                  </li>
-                  <li className="hover:text-yellow-400 cursor-pointer hover:translate-x-2 transition-transform duration-200 ">
-                    Changelog
-                  </li>
+                  {[
+                    '404 Error Page',
+                    'Password Protected',
+                    'Styleguide',
+                    'Licensing',
+                    'Changelog',
+                  ].map(item => (
+                    <li
+                      key={item}
+                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
+                    >
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Separator */}
-        <div className="hidden md:block w-[2px] h-5 bg-white/30"></div>
+        <div className="hidden md:block w-[1px] h-5 bg-white/30"></div>
 
-        {/* Hamburger Menu */}
         <FiMenu
           size={20}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="cursor-pointer hover:text-yellow-400 lg:hidden flex justify-end md:justify-end"
+          className="cursor-pointer hover:text-yellow-400 lg:hidden"
         />
 
-        {/* Cart Icon */}
-        <div className="relative ">
+        <div className="relative">
           <div
             onClick={() => setCartOpen(!cartOpen)}
             className="flex items-center justify-center w-7 h-7 bg-white text-black rounded-full font-semibold cursor-pointer"
@@ -177,35 +384,45 @@ export default function Header() {
 
   return (
     <header
-      className="relative w-full h-[300vh] bg-center bg-cover rounded-t-[60px] overflow-hidden"
+      ref={headerRef} // Attach the ref to the header element
+      className="relative w-full h-[300vh] bg-center bg-cover rounded-t-[60px] "
       style={{
         backgroundImage:
           "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
-        // height: '150vh',
       }}
     >
+      <div
+        ref={cursorRef}
+        // Added background color, padding, and flex centering for the text
+        className="fixed top-0 left-0 w-16 h-16 px-4 py-2 
+               rounded-full text-white text-sm font-semibold 
+               flex items-center justify-center whitespace-nowrap 
+               pointer-events-none z-[9999] opacity-100 
+               transform -translate-x-1/2 -translate-y-1/2
+               transition-all duration-200 ease-out"
+      >
+        Scroll
+      </div>
+      {/* Background overlay */}
       <div className="absolute inset-0 bg-black/60 rounded-t-[60px]"></div>
-      {/* Navigation */}
-      <div className="top-0 left-0 w-full px-8 py-6 z-50 flex items-center lg:justify-between text-white ">
-        <div className="flex items-center gap-8 w-full justify-between  z-50">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <div className="font-bold text-xl  border-white px-3 py-1 cursor-pointer">
-              ARKITECT
+
+      {/* Navigation (Fixed Position) */}
+      <div className=" top-0 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white">
+        <div className="flex items-center gap-8 w-full justify-between z-30">
+          <div className="flex">
+            <div className="font-bold text-xl border-white px-3 py-1 cursor-pointer">
+              arkitect
             </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block lg:block fixed top-6 left-1/2 transform -translate-x-1/2 ">
+          <div className="hidden lg:flex flex-1 justify-center sticky top-0 z-40 backdrop-blur">
             <NavPillContent />
           </div>
-
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="hidden md:flex lg:hidden flex-1 justify-end sticky top-0 z-50 backdrop-blur">
+            <NavPillContent />
+          </div>
+          <div className="md:hidden flex-1 flex justify-end">
             <MobilePillMenu />
           </div>
-
-          {/* Social Icons */}
           <div className="hidden lg:flex items-center space-x-3">
             <a
               href="#"
@@ -229,10 +446,11 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4 ">
-        {/* Main Title (Center) */}
-        <div className="flex flex-col text-center max-w-4xl px-4  mt-[45vw] mb-56 z-10">
-          <h1 className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif  leading-none mb-6">
+      {/* Hero Content (To be animated) */}
+      <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4">
+        {/* Added class 'hero-content' for the GSAP target */}
+        <div className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[45vw] mb-56 z-10">
+          <h1 className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6">
             YOUR <br />
             DREAM <br />
             PLACE
@@ -243,14 +461,12 @@ export default function Header() {
           </p>
         </div>
 
-        {/* Bottom Left & Right Content */}
+        {/* Bottom Left & Right Content (Part of hero-content animation) */}
         <div className="absolute bottom-10 left-0 right-0 p-6 md:p-10 flex flex-col lg:flex-row justify-between items-center lg:items-center w-full gap-12 lg:gap-16 ">
-          {/* Bottom Left */}
           <div className="relative flex flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold mb-3 leading-tight">
               We love & live <br /> architecture
             </h2>
-
             <div className="flex space-x-2 text-sm cursor-pointer items-center gap-4">
               <span className="opacity-75 font-semibold">Our Story</span>
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white flex items-center justify-center">
@@ -266,8 +482,6 @@ export default function Header() {
               </div>
             </div>
           </div>
-
-          {/* Bottom Right */}
           <div className="space-y-4 text-start text-base sm:text-lg md:text-xl lg:text-2xl max-w-full lg:max-w-md">
             <p className="pb-4 sm:pb-8">
               Arkitect creates luxurious, modern spaces where innovation meets
@@ -280,7 +494,6 @@ export default function Header() {
               passion for bold ideas, meticulous craftsmanship, and the future
               of contemporary living.
             </p>
-
             <div className="space-y-1">
               <a
                 href="mailto:hello@example.com"
@@ -299,7 +512,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu Popup */}
       {mobileMenuOpen && (
         <div className="fixed top-[88px] right-4 w-60 rounded-2xl bg-[#1A1A1A] p-8 shadow-lg z-40 text-white md:hidden">
           <ul className="flex flex-col items-center space-y-6 text-lg">
@@ -310,8 +522,7 @@ export default function Header() {
               className="hover:text-yellow-400 cursor-pointer flex items-center justify-between w-full"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
-              Pages
-              <FiChevronDown />
+              Pages <FiChevronDown />
             </li>
             {dropdownOpen && (
               <ul className="flex flex-col items-start pl-4 mt-2 space-y-2 text-base w-full">
