@@ -33,28 +33,30 @@ const servicesData = [
 ];
 
 const ServiceItem = ({ number, title, description, details }) => (
-  <div className="flex flex-col md:flex-row py-12 border-t border-gray-200 md:items-start">
+  <div className="flex flex-col md:flex-row py-12 md:items-start">
     {/* Left Column: Number and Title */}
     <div className="w-full md:w-1/12 flex items-center md:items-start md:pr-8 mb-6 md:mb-0">
       <p className="text-3xl font-medium text-gray-400 md:mb-3">{number}</p>
     </div>
-    <div className="w-full md:w-1/3 flex md:flex-col items-start md:items-start md:pr-12 mb-6 md:mb-0">
-      <h3 className="text-3xl md:text-4xl font-serif font-semibold text-gray-800 leading-tight md:whitespace-nowrap">
-        {title}
-      </h3>
-    </div>
+    <div className="lg:flex ">
+      <div className="w-full md:w-1/3 flex-1 md:flex-col items-start md:items-start md:pr-12 mb-6 md:mb-0">
+        <h3 className="text-3xl md:text-4xl font-serif font-semibold text-gray-800 leading-tight md:whitespace-nowrap">
+          {title}
+        </h3>
+      </div>
 
-    {/* Right Column: Description and Details */}
-    <div className="w-full md:w-2/3">
-      <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-        {description}
-      </p>
+      {/* Right Column: Description and Details */}
+      <div className="w-full md:w-2/3 flex-1">
+        <p className="text-xl text-gray-700 mb-6 leading-relaxed">
+          {description}
+        </p>
 
-      <ul className="space-y-1 text-sm text-gray-600 tracking-widest font-satoshi">
-        {details.map((detail, index) => (
-          <li key={index}>{detail}</li>
-        ))}
-      </ul>
+        <ul className="space-y-1 text-xl text-gray-600 tracking-widest font-satoshi">
+          {details.map((detail, index) => (
+            <li key={index}>{detail}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 );

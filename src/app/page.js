@@ -12,17 +12,30 @@ import TeamSection from '@/Components/TeamSection';
 export default function HomePage() {
   return (
     <>
-      <div className="bg-white">
-        <Navbar></Navbar>
+      <div className="bg-black text-white">
+        <div className="relative">
+          <div className="">
+            <Navbar></Navbar>
+          </div>
 
-        <ServicesSection></ServicesSection>
+          <div className="-mt-10 relative">
+            <ServicesSection></ServicesSection>
+          </div>
+        </div>
+
         <ProjectCards></ProjectCards>
 
         <StatisticsSection></StatisticsSection>
         <TeamSection></TeamSection>
         <LeftAlignHero></LeftAlignHero>
-        <CtaSection></CtaSection>
-        <Footer></Footer>
+        <div>
+          <div className="relative z-40">
+            <CtaSection></CtaSection>
+          </div>
+          <div className="relative -mt-10">
+            <Footer></Footer>
+          </div>
+        </div>
       </div>
     </>
   );

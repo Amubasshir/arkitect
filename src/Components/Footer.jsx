@@ -36,7 +36,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-gray-900 text-gray-300 py-16 px-4 sm:px-8 lg:px-16"
+      className="bg-gray-900 text-gray-300 py-16 px-4 sm:px-8 lg:px-16 mt-8"
     >
       <div ref={footerContentRef} className="max-w-7xl mx-auto flex flex-col">
         {/* Top Section */}

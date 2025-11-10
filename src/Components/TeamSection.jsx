@@ -66,7 +66,7 @@ const TeamMemberRow = ({ member }) => {
     <div className="flex justify-between items-center py-8 border-b border-gray-100 last:border-b-0">
       {/* Left Side: Video/Image Profile and Name */}
       <div className="flex items-center space-x-6 md:space-x-10">
-        <div className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-md bg-gray-200">
+        <div className="w-20 h-20 md:w-40 md:h-40 flex-shrink-0 rounded-4xl overflow-hidden shadow-md bg-gray-200">
           {/* কন্ডিশনাল রেন্ডারিং: যদি ভিডিওতে এরর না থাকে তবে ভিডিও দেখাও */}
           {!videoError && member.videoUrl ? (
             <video
@@ -101,37 +101,37 @@ const TeamMemberRow = ({ member }) => {
           )}
         </div>
 
-        <h3 className="text-xl md:text-3xl font-semibold text-gray-900 font-serif">
+        <h3 className="text-xl md:text-3xl font-extralight text-gray-900 font-serif">
           {member.name}
         </h3>
       </div>
 
       {/* Right Side: Title and Socials (Previous code remains the same) */}
       <div className="flex items-center space-x-6 md:space-x-10">
-        <p className="hidden sm:block text-sm md:text-base uppercase tracking-widest text-gray-700 font-medium whitespace-nowrap">
+        <p className="hidden sm:block text-sm md:text-base uppercase tracking-widest text-black font-medium whitespace-nowrap">
           {member.title}
         </p>
         <div className="flex space-x-3 text-gray-500">
           <a
             href={member.socials.twitter}
             aria-label="Twitter"
-            className="hover:text-gray-900 transition duration-150"
+            className="hover:bg-gray-300 transition duration-150 h-10 w-10 rounded-full bg-gray-200 text-black flex items-center justify-center"
           >
-            <FaTwitter size={18} />
+            <FaTwitter size={20} />
           </a>
           <a
             href={member.socials.instagram}
             aria-label="Instagram"
-            className="hover:text-gray-900 transition duration-150"
+            className="hover:bg-gray-300 transition duration-150 h-10 w-10 rounded-full bg-gray-200 text-black flex items-center justify-center"
           >
-            <FaInstagram size={18} />
+            <FaInstagram size={20} />
           </a>
           <a
             href={member.socials.facebook}
             aria-label="Facebook"
-            className="hover:text-gray-900 transition duration-150"
+            className="hover:bg-gray-300 transition duration-150 h-10 w-10 rounded-full bg-gray-200 text-black flex items-center justify-center"
           >
-            <FaFacebookF size={18} />
+            <FaFacebookF size={20} />
           </a>
         </div>
       </div>

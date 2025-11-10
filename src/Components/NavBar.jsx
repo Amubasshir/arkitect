@@ -15,6 +15,7 @@ export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const dropdownTimeout = useRef(null);
   const targetDivRef = useRef(null);
   const headerRef = useRef(null); // Keep this if you use the scroll effect
@@ -22,109 +23,37 @@ export default function Header() {
 
   const pulseTweenRef = useRef(null);
 
-  // useEffect(() => {
-  //   const cursor = cursorRef.current;
-  //   if (!cursor) return;
-
-  //   document.body.style.cursor = 'none';
-
-  //   const pos = { x: window.innerWidth / 6, y: window.innerHeight / 6 };
-  //   const actual = { x: pos.x, y: pos.y };
-  //   const setCursorX = gsap.quickSetter(cursor, 'x', 'px');
-  //   const setCursorY = gsap.quickSetter(cursor, 'y', 'px');
-
-  //   const moveCursor = e => {
-  //     pos.x = e.clientX;
-  //     pos.y = e.clientY;
-
-  //   };
-
-  //   const animateCursor = () => {
-  //     const damp = 0.2;
-  //     actual.x += (pos.x - actual.x) * damp;
-  //     actual.y += (pos.y - actual.y) * damp;
-
-  //     setCursorX(actual.x);
-  //     setCursorY(actual.y);
-  //   };
-
-  //   const handleHover = e => {
-  //     const isInteractive = e.target.closest(
-  //       'a, button, [role="button"], .cursor-pointer, li, svg'
-  //     );
-
-  //     if (isInteractive) {
-  //       if (!pulseTweenRef.current) {
-  //         pulseTweenRef.current = gsap.to(cursor, {
-  //           scale: 0,
-  //           backgroundColor: '#fff',
-  //           color: '#000',
-
-  //           duration: 0.25,
-  //           ease: 'power2.out',
-  //         });
-  //       } else {
-  //         pulseTweenRef.current.play();
-  //       }
-  //     } else {
-  //       if (pulseTweenRef.current) {
-  //         // Reset to default look (white background, black text)
-  //         pulseTweenRef.current.reverse();
-  //       }
-  //     }
-  //   };
-  //   // Initial big size
-  //   gsap.set(cursor, {
-  //     scale: 1.1,
-  //     backgroundColor: '#000',
-  //   });
-
-  //   gsap.ticker.add(animateCursor);
-  //   window.addEventListener('mousemove', moveCursor);
-  //   window.addEventListener('mouseover', handleHover);
-
-  //   return () => {
-  //     window.removeEventListener('mousemove', moveCursor);
-  //     window.removeEventListener('mouseover', handleHover);
-  //     gsap.ticker.remove(animateCursor);
-  //     document.body.style.cursor = 'default';
-  //   };
-  // }, []);
-
-  // ... (Component state and refs unchanged) ...
-
   useEffect(() => {
     const cursor = cursorRef.current;
-    const header = headerRef.current; // headerRef টার্গেট করুন
+    const header = headerRef.current;
 
     if (!cursor || !header) return;
 
-    // --- SETUP & INIT ---
     document.body.style.cursor = 'none';
 
-    // ইনিশিয়াল পজিশন স্ক্রিনের বাইরে রাখুন
     const pos = { x: -9999, y: -9999 };
     const actual = { x: -9999, y: -9999 };
+    const pulseTweenRef = { current: null };
 
     const setCursorX = gsap.quickSetter(cursor, 'x', 'px');
     const setCursorY = gsap.quickSetter(cursor, 'y', 'px');
 
-    // Initial style for the "Scroll" text cursor (শুরুতে অদৃশ্য)
+    // Initial cursor setup
     gsap.set(cursor, {
       scale: 1.1,
       backgroundColor: '#000',
-      opacity: 0, // শুরুতে অদৃশ্য রাখুন
+      opacity: 0,
       x: -9999,
       y: -9999,
     });
 
-    // --- MOUSE MOVEMENT LOGIC (Lag/Follow) ---
+    // Track mouse position
     const moveCursor = e => {
-      // e.clientX/Y ব্যবহার করে পুরো স্ক্রিনে মাউসের অবস্থান ট্র্যাক করুন
       pos.x = e.clientX;
       pos.y = e.clientY;
     };
 
+    // Smooth follow animation
     const animateCursor = () => {
       const damp = 0.2;
       actual.x += (pos.x - actual.x) * damp;
@@ -134,18 +63,14 @@ export default function Header() {
       setCursorY(actual.y);
     };
 
-    // --- HOVER LOGIC (Cursor Hide + Text Slide) ---
+    // Hover logic — handle interactive elements
     const handleHover = e => {
-      const isInteractive = e.target.closest(
-        'a, button, [role="button"], .cursor-pointer, li, svg'
-      );
-
-      const resetTarget = e.target.closest(
+      const target = e.target.closest(
         'li, a, button, [role="button"], .cursor-pointer, svg'
       );
+      const isInteractive = !!target;
 
       if (isInteractive) {
-        // 1. কাস্টম কার্সার অদৃশ্য করার লজিক
         if (!pulseTweenRef.current) {
           pulseTweenRef.current = gsap.to(cursor, {
             scale: 0,
@@ -157,65 +82,33 @@ export default function Header() {
         } else {
           pulseTweenRef.current.play();
         }
-
-        // 2. টেক্সট স্লাইড লজিক (LI ট্যাগগুলির জন্য)
-        if (isInteractive.tagName === 'LI') {
-          gsap.to(isInteractive, {
-            x: 8,
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-        }
       } else {
-        // --- রিসেট লজিক ---
-        if (pulseTweenRef.current) {
-          pulseTweenRef.current.reverse();
-        }
-
-        if (resetTarget) {
-          gsap.to(resetTarget, {
-            x: 0,
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-        }
+        if (pulseTweenRef.current) pulseTweenRef.current.reverse();
       }
     };
 
-    // --- BOUNDARY LOGIC ---
-
-    // যখন কার্সার টার্গেট Div-এ প্রবেশ করে
+    // Cursor enters header area
     const handleMouseEnter = e => {
-      // কার্সারকে দৃশ্যমান করুন
       gsap.to(cursor, { opacity: 1, duration: 0.3 });
-
-      // কার্সারকে মাউসের প্রাথমিক অবস্থানে সেট করুন
       pos.x = e.clientX;
       pos.y = e.clientY;
     };
 
-    // যখন কার্সার টার্গেট Div-এর বাইরে চলে যায়
+    // Cursor leaves header area
     const handleMouseLeave = () => {
-      // কার্সারকে অদৃশ্য করুন
       gsap.to(cursor, { opacity: 0, duration: 0.3 });
 
-      // pos এবং actual উভয়কেই স্ক্রিনের বাইরে রাখুন, যাতে এটি নড়াচড়া না করে
       pos.x = -9999;
       pos.y = -9999;
       actual.x = -9999;
       actual.y = -9999;
 
-      // ডিফল্ট কার্সারকে ফিরিয়ে আনুন
       document.body.style.cursor = 'default';
-
-      // হোভার অ্যানিমেশন বন্ধ করুন
       if (pulseTweenRef.current) pulseTweenRef.current.reverse();
     };
 
-    // --- EVENT LISTENERS & CLEANUP ---
+    // Event listeners
     gsap.ticker.add(animateCursor);
-
-    // উইন্ডো নয়, হেডার এলিমেন্টের উপর লিসেনার যোগ করুন:
     header.addEventListener('mousemove', moveCursor);
     header.addEventListener('mouseover', handleHover);
     header.addEventListener('mouseenter', handleMouseEnter);
@@ -223,16 +116,16 @@ export default function Header() {
 
     return () => {
       gsap.ticker.remove(animateCursor);
-      document.body.style.cursor = 'default'; // আনমাউন্টের সময় ডিফল্ট কার্সার নিশ্চিত করুন
+      document.body.style.cursor = 'default';
       if (pulseTweenRef.current) pulseTweenRef.current.kill();
 
-      // হেডার থেকে ইভেন্ট লিসেনারগুলো সরিয়ে ফেলুন
       header.removeEventListener('mousemove', moveCursor);
       header.removeEventListener('mouseover', handleHover);
       header.removeEventListener('mouseenter', handleMouseEnter);
       header.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
+
   const handleMouseEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);
@@ -242,130 +135,137 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 300);
   };
 
-  const NavPillContent = () => (
-    <nav className="flex items-center bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg relative font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible">
-      {/* ... (rest of NavPillContent JSX remains the same) ... */}
-      <ul className="hidden lg:flex items-center space-x-6 text-sm font-medium">
-        <li className="hover:text-yellow-400 cursor-pointer">Projects</li>
-        <li className="hover:text-yellow-400 cursor-pointer">Services</li>
-        <li className="hover:text-yellow-400 cursor-pointer">About</li>
-      </ul>
-      <div className="flex items-center gap-4 ml-auto md:ml-0">
-        <div
-          className="relative hidden md:flex cursor-pointer"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <span className="flex items-center gap-1 hover:text-yellow-400">
-            Pages <FiChevronDown size={14} />
-          </span>
+  const NavPillContent = () => {
+    return (
+      <nav className="fixed top-8 flex items-center bg-[#1A1A1A] text-white px-7 py-5 rounded-full shadow-lg font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible z-50">
+        {/* Nav links */}
+        <ul className="hidden lg:flex items-center space-x-6 text-sm font-medium">
+          <li className="cursor-pointer text-xl">Projects</li>
+          <li className="cursor-pointer text-xl">Services</li>
+          <li className="cursor-pointer text-xl">About</li>
+        </ul>
 
+        {/* Dropdown */}
+        <div className="flex items-center gap-4 ml-auto md:ml-0">
           <div
-            className={`absolute w-52 -translate-x-1/2 top-full mt-4 bg-[#121212] rounded-[30px] shadow-2xl text-sm transition-all duration-200 ease-out ${
-              dropdownOpen
-                ? 'opacity-100 visible translate-y-0'
-                : 'opacity-0 invisible -translate-y-6'
-            } w-[45vw] max-w-[700px]`}
+            className="relative hidden md:flex cursor-pointer"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            {/* Dropdown content */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 py-6 sm:px-12 sm:py-8 lg:px-16 lg:py-10">
-              <div>
-                <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
-                  Pages
-                </h3>
-                <ul className="space-y-2">
-                  {[
-                    'Home',
-                    'Projects',
-                    'Projects Single',
-                    'Services',
-                    'About',
-                    'Career',
-                    'Contact',
-                  ].map(item => (
-                    <li
-                      key={item}
-                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <span className="flex items-center gap-1 text-xl">
+              Pages <FiChevronDown size={14} />
+            </span>
 
-              <div>
-                <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
-                  Pages
-                </h3>
-                <ul className="space-y-2">
-                  {['Blog', 'Blog Post', 'Shop', 'Shop Single'].map(item => (
-                    <li
-                      key={item}
-                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                  <li className="hover:text-yellow-400 cursor-pointer font-semibold underline transition-all duration-300 transform hover:translate-x-2">
-                    More Templates
-                  </li>
-                </ul>
-              </div>
+            <div
+              className={`absolute  -translate-x-1/2 top-full mt-6 bg-[#121212] rounded-[30px] shadow-2xl text-xl w-[60vw] max-w-[1000px] 
+    transition-all duration-300 ease-in-out transform ${
+      dropdownOpen
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 -translate-y-4 pointer-events-none'
+    }`}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 px-6 py-6 sm:px-12 sm:py-8 lg:px-16 lg:py-10 mt-6">
+                <div>
+                  <h3 className="text-xl text-white uppercase mb-3 font-semibold">
+                    Pages
+                  </h3>
+                  <ul className="space-y-2">
+                    {[
+                      'Home',
+                      'Projects',
+                      'Projects Single',
+                      'Services',
+                      'About',
+                      'Career',
+                      'Contact',
+                    ].map(item => (
+                      <li
+                        key={item}
+                        className="cursor-pointer text-white transition-transform duration-300 ease-in-out hover:translate-x-2 hover:text-yellow-400"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              <div>
-                <h3 className="text-xs text-gray-400 uppercase mb-3 font-semibold">
-                  Utility Pages
-                </h3>
-                <ul className="space-y-2">
-                  {[
-                    '404 Error Page',
-                    'Password Protected',
-                    'Styleguide',
-                    'Licensing',
-                    'Changelog',
-                  ].map(item => (
-                    <li
-                      key={item}
-                      className="hover:text-yellow-400 cursor-pointer transition-all duration-300 transform hover:translate-x-2"
-                    >
-                      {item}
+                <div>
+                  <h3 className="text-xl text-white uppercase mb-3 font-semibold">
+                    Pages
+                  </h3>
+                  <ul className="space-y-2">
+                    {['Blog', 'Blog Post', 'Shop', 'Shop Single'].map(item => (
+                      <li
+                        key={item}
+                        className="cursor-pointer text-white transition-transform duration-300 ease-in-out hover:translate-x-2 hover:text-yellow-400"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                    <li className="cursor-pointer font-semibold underline text-white">
+                      More Templates
                     </li>
-                  ))}
-                </ul>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl text-white uppercase mb-3 font-semibold">
+                    Utility Pages
+                  </h3>
+                  <ul className="space-y-2">
+                    {[
+                      '404 Error Page',
+                      'Password Protected',
+                      'Styleguide',
+                      'Licensing',
+                      'Changelog',
+                    ].map(item => (
+                      <li
+                        key={item}
+                        className="cursor-pointer text-white transition-transform duration-300 ease-in-out hover:translate-x-2 hover:text-yellow-400"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="hidden md:block w-[1px] h-5 bg-white/30"></div>
+          {/* Divider */}
+          <div className="hidden md:block w-[1px] h-5 bg-white/30"></div>
 
-        <FiMenu
-          size={20}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="cursor-pointer hover:text-yellow-400 lg:hidden"
-        />
+          {/* Mobile Menu Icon */}
+          <FiMenu
+            size={20}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="cursor-pointer lg:hidden"
+          />
 
-        <div className="relative">
-          <div
-            onClick={() => setCartOpen(!cartOpen)}
-            className="flex items-center justify-center w-7 h-7 bg-white text-black rounded-full font-semibold cursor-pointer"
-          >
-            {cartItems.length}
-          </div>
-          {cartOpen && (
-            <div className="absolute right-0 mt-4 bg-[#1A1A1A] text-white rounded-2xl shadow-xl w-64 p-4">
-              <p className="text-sm text-gray-400 text-center">
-                Your cart is empty
-              </p>
+          {/* Cart */}
+          <div className="relative">
+            <div
+              onClick={() => setCartOpen(!cartOpen)}
+              className="flex items-center justify-center w-7 h-7 bg-white text-black rounded-full font-semibold cursor-pointer"
+            >
+              {cartItems.length}
             </div>
-          )}
+            {cartOpen && (
+              <div className="absolute right-0 mt-4 bg-[#1A1A1A] text-white rounded-2xl shadow-xl w-64 p-4">
+                <p className="text-sm text-gray-400 text-center">
+                  Your cart is empty
+                </p>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
-  );
+      </nav>
+    );
+  };
 
   const MobilePillMenu = () => (
-    <div className="flex items-center space-x-4 bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg relative font-satoshi">
+    <div className="fixed top-8 z-50 flex items-center space-x-4 bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg font-satoshi">
       <FiMenu
         size={20}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -385,26 +285,27 @@ export default function Header() {
   return (
     <header
       ref={headerRef} // Attach the ref to the header element
-      className="relative w-full h-[300vh] bg-center bg-cover rounded-t-[60px] "
+      className="relative mx-auto w-[96vw] md:h-[220vh] lg:h-[330vh] bg-center bg-cover rounded-t-[70px] px-10 overflow-hidden"
       style={{
         backgroundImage:
           "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
+        paddingTop: '20px',
       }}
     >
       <div
         ref={cursorRef}
         // Added background color, padding, and flex centering for the text
         className="fixed top-0 left-0 w-16 h-16 px-4 py-2 
-               rounded-full text-white text-sm font-semibold 
-               flex items-center justify-center whitespace-nowrap 
-               pointer-events-none z-[9999] opacity-100 
-               transform -translate-x-1/2 -translate-y-1/2
-               transition-all duration-200 ease-out"
+                  rounded-full text-white text-sm font-semibold 
+                  flex items-center justify-center whitespace-nowrap 
+                    pointer-events-none z-[9999] opacity-100 
+                       transform -translate-x-1/2 -translate-y-1/2
+                             transition-all duration-200 ease-out"
       >
         Scroll
       </div>
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-black/60 rounded-t-[60px]"></div>
+      <div className="absolute inset-0 bg-black/20 rounded-t-[60px]"></div>
 
       {/* Navigation (Fixed Position) */}
       <div className=" top-0 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white">
@@ -414,15 +315,18 @@ export default function Header() {
               arkitect
             </div>
           </div>
-          <div className="hidden lg:flex flex-1 justify-center sticky top-0 z-40 backdrop-blur">
+
+          <div className="hidden lg:flex lg:justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 px-8 py-4">
             <NavPillContent />
           </div>
-          <div className="hidden md:flex lg:hidden flex-1 justify-end sticky top-0 z-50 backdrop-blur">
+
+          <div className="hidden md:flex lg:hidden flex-1 justify-end  z-50 sticky top-5">
             <NavPillContent />
           </div>
           <div className="md:hidden flex-1 flex justify-end">
             <MobilePillMenu />
           </div>
+
           <div className="hidden lg:flex items-center space-x-3">
             <a
               href="#"
@@ -449,7 +353,7 @@ export default function Header() {
       {/* Hero Content (To be animated) */}
       <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
-        <div className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[45vw] mb-56 z-10">
+        <div className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[25vw] mb-56 z-10">
           <h1 className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6">
             YOUR <br />
             DREAM <br />
@@ -462,13 +366,15 @@ export default function Header() {
         </div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
-        <div className="absolute bottom-10 left-0 right-0 p-6 md:p-10 flex flex-col lg:flex-row justify-between items-center lg:items-center w-full gap-12 lg:gap-16 ">
-          <div className="relative flex flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold mb-3 leading-tight">
+        <div className="absolute bottom-10   p-6 md:p-10 flex-col lg:flex-row justify-center items-center lg:items-center w-full gap-20 lg:gap-16 hidden md:flex  z-10">
+          <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-serif  mb-3 leading-tight">
               We love & live <br /> architecture
             </h2>
             <div className="flex space-x-2 text-sm cursor-pointer items-center gap-4">
-              <span className="opacity-75 font-semibold">Our Story</span>
+              <span className="opacity-75 font-semibold text-xl text-white">
+                Our Story
+              </span>
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white flex items-center justify-center">
                 <svg
                   width="10"
@@ -482,7 +388,7 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className="space-y-4 text-start text-base sm:text-lg md:text-xl lg:text-2xl max-w-full lg:max-w-md">
+          <div className="flex-1 space-y-4 text-start text-base sm:text-lg md:text-xl lg:text-4xl max-w-full ">
             <p className="pb-4 sm:pb-8">
               Arkitect creates luxurious, modern spaces where innovation meets
               timeless elegance. Our designs push boundaries, blending
@@ -497,13 +403,13 @@ export default function Header() {
             <div className="space-y-1">
               <a
                 href="mailto:hello@example.com"
-                className="block font-semibold hover:text-yellow-400"
+                className="block  hover:text-yellow-400"
               >
                 hello@example.com
               </a>
               <a
                 href="tel:+4917612345679"
-                className="block font-semibold hover:text-yellow-400"
+                className="block hover:text-yellow-400"
               >
                 +49 176 123 456 79
               </a>
@@ -514,12 +420,12 @@ export default function Header() {
 
       {mobileMenuOpen && (
         <div className="fixed top-[88px] right-4 w-60 rounded-2xl bg-[#1A1A1A] p-8 shadow-lg z-40 text-white md:hidden">
-          <ul className="flex flex-col items-center space-y-6 text-lg">
+          <ul className="flex flex-col  space-y-6 text-lg">
             <li className="hover:text-yellow-400 cursor-pointer">Projects</li>
             <li className="hover:text-yellow-400 cursor-pointer">Services</li>
             <li className="hover:text-yellow-400 cursor-pointer">About</li>
             <li
-              className="hover:text-yellow-400 cursor-pointer flex items-center justify-between w-full"
+              className="hover:text-yellow-400 cursor-pointer flex items-center mr-4 w-full"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               Pages <FiChevronDown />
