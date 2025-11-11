@@ -116,7 +116,7 @@ export default function ShowcaseGSAP() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative bg-white">
+    <div ref={containerRef} className="relative bg-white ">
       {/* Custom Cursor */}
       <div
         ref={cursorRef}
@@ -143,25 +143,25 @@ export default function ShowcaseGSAP() {
                 {/* Title and Description */}
                 <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
                   <div className="max-w-full sm:max-w-md">
-                    <h2 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-4 tracking-tight uppercase text-gray-100 leading-tight">
+                    <h2 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-medium mb-4 tracking-tight uppercase text-gray-100 leading-tight">
                       {project.title}
                     </h2>
-                    <p className="text-xs sm:text-base md:text-lg font-light max-w-xs text-gray-300">
+                    <p className="text-xs sm:text-base md:text-lg font-medium max-w-xs text-gray-300">
                       {project.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="flex justify-between items-end flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
+                <div className="flex justify-between items-end flex-wrap sm:flex-nowrap gap-4 sm:gap-0 ">
                   <div className="flex space-x-2 text-[8px] sm:text-[10px] font-semibold flex-wrap gap-2">
                     {project.btn && (
-                      <span className="px-5 py-3 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer text-sm">
+                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer font-semibold ">
                         {project.btn}
                       </span>
                     )}
                     {project.btn2 && (
-                      <span className="px-5 py-3 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer text-sm">
+                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer ">
                         {project.btn2}
                       </span>
                     )}

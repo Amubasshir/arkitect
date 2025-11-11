@@ -9,7 +9,7 @@ const backgroundImage = {
 export default function LeftAlignHero() {
   return (
     // Set min-h-screen for full height view
-    <section className="relative w-full min-h-[110vh] bg-gray-900 overflow-hidden ">
+    <section className="relative w-full min-h-[140vh] bg-gray-900 overflow-hidden ">
       {/* 1. Background Image */}
       <img
         src={backgroundImage.url}
@@ -19,7 +19,7 @@ export default function LeftAlignHero() {
       <div className="absolute inset-0 bg-black/15 "></div>
 
       {/* 3. Content Area */}
-      <div className="relative z-10 w-full h-full min-h-screen flex flex-col justify-end pb-20 px-8 sm:px-16 lg:px-24">
+      <div className="relative z-10 w-full h-full min-h-screen flex flex-col justify-end pb-20 px-8 sm:px-16 lg:px-24  mt-20">
         <div className="max-w-4xl text-white">
           {/* Main Title */}
           <h1 className="leading-tight mb-6 tracking-tight">
@@ -34,15 +34,17 @@ export default function LeftAlignHero() {
           </p>
 
           {/* Call to Action Link */}
-          <a
-            href="#"
-            className="flex items-center text-white text-base font-semibold group w-max"
-          >
-            Our Story
-            <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-              &rarr; {/* Right Arrow */}
-            </span>
-          </a>
+          <div className="pt-26">
+            <a
+              href="#"
+              className="flex items-center text-white text-base font-semibold group w-max"
+            >
+              Our Story
+              <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1 w-10 h-10 rounded-full border flex items-center justify-center">
+                &rarr; {/* Right Arrow */}
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

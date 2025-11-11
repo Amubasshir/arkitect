@@ -137,7 +137,7 @@ export default function Header() {
 
   const NavPillContent = () => {
     return (
-      <nav className="fixed top-8 flex items-center bg-[#1A1A1A] text-white px-7 py-5 rounded-full shadow-lg font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible z-50">
+      <nav className="fixed top-16 flex items-center bg-[#1A1A1A] text-white px-7 py-5 rounded-full shadow-lg font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible z-50">
         {/* Nav links */}
         <ul className="hidden lg:flex items-center space-x-6 text-sm font-medium">
           <li className="cursor-pointer text-xl">Projects</li>
@@ -285,11 +285,14 @@ export default function Header() {
   return (
     <header
       ref={headerRef} // Attach the ref to the header element
-      className="relative mx-auto w-[96vw] md:h-[220vh] lg:h-[330vh] bg-center bg-cover rounded-t-[70px] px-10 overflow-hidden"
+      className="relative mx-auto w-[96vw] md:h-[190vh] lg:h-[290vh] bg-center  bg-contain bg-no-repeat rounded-t-[70px] overflow-hidden "
       style={{
         backgroundImage:
           "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
-        paddingTop: '20px',
+
+        backgroundPosition: 'center top',
+
+        backgroundSize: 'cover',
       }}
     >
       <div
@@ -308,8 +311,8 @@ export default function Header() {
       <div className="absolute inset-0 bg-black/20 rounded-t-[60px]"></div>
 
       {/* Navigation (Fixed Position) */}
-      <div className=" top-0 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white">
-        <div className="flex items-center gap-8 w-full justify-between z-30">
+      <div className=" top-10 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white ">
+        <div className="flex items-center gap-8 w-full justify-between z-30 mt-6">
           <div className="flex">
             <div className="font-bold text-xl border-white px-3 py-1 cursor-pointer">
               arkitect
@@ -330,21 +333,21 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-3">
             <a
               href="#"
-              className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center transition-colors"
             >
-              <FaTwitter />
+              <FaTwitter color="black" />
             </a>
             <a
               href="#"
-              className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
             >
-              <FaFacebookF />
+              <FaFacebookF color="black" />
             </a>
             <a
               href="#"
-              className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
             >
-              <FaInstagram />
+              <FaInstagram color="black" />
             </a>
           </div>
         </div>
@@ -366,12 +369,12 @@ export default function Header() {
         </div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
-        <div className="absolute bottom-10   p-6 md:p-10 flex-col lg:flex-row justify-center items-center lg:items-center w-full gap-20 lg:gap-16 hidden md:flex  z-10">
+        <div className="absolute bottom-40   p-6 md:p-10 flex-col lg:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10">
           <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-serif  mb-3 leading-tight">
               We love & live <br /> architecture
             </h2>
-            <div className="flex space-x-2 text-sm cursor-pointer items-center gap-4">
+            <div className="flex space-x-2 text-sm cursor-pointer items-center gap-4 mt-16">
               <span className="opacity-75 font-semibold text-xl text-white">
                 Our Story
               </span>
@@ -388,17 +391,14 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className="flex-1 space-y-4 text-start text-base sm:text-lg md:text-xl lg:text-4xl max-w-full ">
-            <p className="pb-4 sm:pb-8">
+          <div className="flex-1 space-y-4 text-start text-base sm:text-ms md:text-lg lg:text-3xl max-w-full ">
+            <p className="pb-2 sm:pb-4">
               Arkitect creates luxurious, modern spaces where innovation meets
-              timeless elegance. Our designs push boundaries, blending
-              precision, creativity, and functionality.
+              timeless elegance. Our designs push boundaries.
             </p>
             <p>
               With a commitment to excellence, we craft architectural
-              masterpieces that inspire and endure. Every project reflects our
-              passion for bold ideas, meticulous craftsmanship, and the future
-              of contemporary living.
+              masterpieces that inspire and endure. Every project reflects
             </p>
             <div className="space-y-1">
               <a

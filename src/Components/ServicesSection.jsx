@@ -40,18 +40,18 @@ const ServiceItem = ({ number, title, description, details }) => (
     </div>
     <div className="lg:flex ">
       <div className="w-full md:w-1/3 flex-1 md:flex-col items-start md:items-start md:pr-12 mb-6 md:mb-0">
-        <h3 className="text-3xl md:text-4xl font-serif font-semibold text-gray-800 leading-tight md:whitespace-nowrap">
+        <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight md:whitespace-nowrap">
           {title}
         </h3>
       </div>
 
       {/* Right Column: Description and Details */}
       <div className="w-full md:w-2/3 flex-1">
-        <p className="text-xl text-gray-700 mb-6 leading-relaxed">
+        <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed">
           {description}
         </p>
 
-        <ul className="space-y-1 text-xl text-gray-600 tracking-widest font-satoshi">
+        <ul className="space-y-1 text-[.875rem]  text-gray-600 tracking-widest font-satoshi font-medium uppercase">
           {details.map((detail, index) => (
             <li key={index}>{detail}</li>
           ))}
