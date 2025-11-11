@@ -30,7 +30,7 @@ export default function HomePage() {
         <LeftAlignHero></LeftAlignHero>
       </div>
       <div>
-        <div className="relative  bg-black px-4">
+        <div className="relative  bg-black px-2">
           <CtaSection></CtaSection>
         </div>
         <div className="relative -mt-10">
