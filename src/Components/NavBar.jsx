@@ -285,7 +285,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef} // Attach the ref to the header element
-      className="relative mx-auto w-[96vw] md:h-[190vh] lg:h-[290vh] bg-center  bg-contain bg-no-repeat rounded-t-[70px] overflow-hidden "
+      className="relative mx-auto w-[96vw] md:h-[190vh] lg:h-[270vh] bg-center  bg-contain bg-no-repeat rounded-t-[70px] overflow-hidden "
       style={{
         backgroundImage:
           "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
