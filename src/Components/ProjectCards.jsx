@@ -153,26 +153,28 @@ export default function ShowcaseGSAP() {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="flex justify-between items-end flex-wrap sm:flex-nowrap gap-4 sm:gap-0 ">
+                {/* Bottom Section */}
+                <div className="flex justify-between items-end flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
                   <div className="flex space-x-2 text-[8px] sm:text-[10px] font-semibold flex-wrap gap-2">
                     {project.btn && (
-                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer font-semibold ">
+                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer font-semibold">
                         {project.btn}
                       </span>
                     )}
                     {project.btn2 && (
-                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer ">
+                      <span className="px-3 py-2 border border-white/50 rounded-full uppercase tracking-wider cursor-pointer">
                         {project.btn2}
                       </span>
                     )}
                   </div>
 
-                  {/* Only last card shows button */}
-                  {index === projectData.length - 1 && (
-                    <div className="px-5 py-3 sm:px-5 sm:py-3 border border-white rounded-full text-[10px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black">
-                      {project.button}
-                    </div>
-                  )}
+                  {/* Button always visible on mobile, only last visible on larger screens */}
+                  <div
+                    className={`px-5 py-3 sm:px-5 sm:py-3 border border-white rounded-full text-[10px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
+      ${index === projectData.length - 1 ? 'block' : 'block sm:hidden'}`}
+                  >
+                    {project.button || 'EXPLORE'}
+                  </div>
                 </div>
               </div>
             </div>

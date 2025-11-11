@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-
+import { motion } from 'framer-motion';
 import { FiChevronDown, FiMenu } from 'react-icons/fi';
 
 import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
@@ -135,14 +135,50 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 300);
   };
 
+  // const container = {
+  //   hidden: {},
+  //   visible: {
+  //     transition: { staggerChildren: 0.25, delayChildren: 0.1 },
+  //   },
+  // };
+
+  // const item = {
+  //   hidden: { y: 40, opacity: 0, scale: 0.95 },
+  //   visible: {
+  //     y: 0,
+  //     opacity: 1,
+  //     scale: 1,
+  //     transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
+  //   },
+  // };
+  const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.15 } },
+  };
+
+  const item = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
   const NavPillContent = () => {
     return (
-      <nav className="fixed top-16 flex items-center bg-[#1A1A1A] text-white px-7 py-5 rounded-full shadow-lg font-satoshi lg:space-x-8 md:justify-between w-auto overflow-visible z-50">
+      <nav className="fixed top-16 flex items-center bg-[#1A1A1A] text-white px-4 py-2 rounded-full shadow-lg font-satoshi  md:justify-between w-auto overflow-visible z-50">
         {/* Nav links */}
-        <ul className="hidden lg:flex items-center space-x-6 text-sm font-medium">
-          <li className="cursor-pointer text-xl">Projects</li>
-          <li className="cursor-pointer text-xl">Services</li>
-          <li className="cursor-pointer text-xl">About</li>
+        <ul className="hidden lg:flex items-center text-sm font-medium">
+          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+            Projects
+          </li>
+          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+            Services
+          </li>
+          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+            About
+          </li>
         </ul>
 
         {/* Dropdown */}
@@ -152,7 +188,7 @@ export default function Header() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <span className="flex items-center gap-1 text-xl">
+            <span className="flex items-center gap-1 px-5 py-3 font-light hover:bg-gray-600 rounded-full">
               Pages <FiChevronDown size={14} />
             </span>
 
@@ -265,7 +301,7 @@ export default function Header() {
   };
 
   const MobilePillMenu = () => (
-    <div className="fixed top-8 z-50 flex items-center space-x-4 bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg font-satoshi">
+    <div className="fixed top-14 z-50 flex items-center space-x-4 bg-[#1A1A1A] text-white px-5 py-3 rounded-full shadow-lg font-satoshi">
       <FiMenu
         size={20}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -284,33 +320,21 @@ export default function Header() {
 
   return (
     <header
-      ref={headerRef} // Attach the ref to the header element
-      className="relative mx-auto w-[96vw] md:h-[190vh] lg:h-[270vh] bg-center  bg-contain bg-no-repeat rounded-t-[70px] overflow-hidden "
-      style={{
-        backgroundImage:
-          "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
-
-        backgroundPosition: 'center top',
-
-        backgroundSize: 'cover',
-      }}
+      ref={headerRef}
+      className="relative mx-auto w-[94vw] md:w-[96vw] md:h-[190vh] lg:h-[292vh] rounded-t-[70px] overflow-hidden"
     >
+      {/* Static Zoomed Background Image */}
       <div
-        ref={cursorRef}
-        // Added background color, padding, and flex centering for the text
-        className="fixed top-0 left-0 w-16 h-16 px-4 py-2 
-                  rounded-full text-white text-sm font-semibold 
-                  flex items-center justify-center whitespace-nowrap 
-                    pointer-events-none z-[9999] opacity-100 
-                       transform -translate-x-1/2 -translate-y-1/2
-                             transition-all duration-200 ease-out"
-      >
-        Scroll
-      </div>
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-black/20 rounded-t-[60px]"></div>
+        className="absolute inset-0 bg-center bg-cover scale-[1.2]"
+        style={{
+          backgroundImage:
+            "url('https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d6591482d4a5dc604ccc3_home-hero-bg.webp')",
+        }}
+      ></div>
 
-      {/* Navigation (Fixed Position) */}
+      {/* Optional dark overlay */}
+      <div className="absolute inset-0 bg-black/15 rounded-t-[60px] pointer-events-none"></div>
+
       <div className=" top-10 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white ">
         <div className="flex items-center gap-8 w-full justify-between z-30 mt-6">
           <div className="flex">
@@ -339,13 +363,13 @@ export default function Header() {
             </a>
             <a
               href="#"
-              className="w-9 h-9 bg-white rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center  transition-colors"
             >
               <FaFacebookF color="black" />
             </a>
             <a
               href="#"
-              className="w-9 h-9 bg-white rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center  transition-colors"
             >
               <FaInstagram color="black" />
             </a>
@@ -356,17 +380,35 @@ export default function Header() {
       {/* Hero Content (To be animated) */}
       <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
-        <div className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[25vw] mb-56 z-10">
-          <h1 className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6">
-            YOUR <br />
-            DREAM <br />
-            PLACE
-          </h1>
-          <p className="text-2xl max-w-md font-satoshi text-center mx-auto">
+        <motion.div
+          className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[5vw] md:mt-[16vw] lg:mt-[25vw] mb-56 z-10"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            variants={item}
+            className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 mt-20"
+          >
+            <motion.span variants={item} className="block">
+              YOUR
+            </motion.span>
+            <motion.span variants={item} className="block">
+              DREAM
+            </motion.span>
+            <motion.span variants={item} className="block">
+              PLACE
+            </motion.span>
+          </motion.h1>
+
+          <motion.p
+            variants={item}
+            className="text-2xl max-w-md font-satoshi text-center mx-auto"
+          >
             Designing timeless, luxurious spaces that redefine modern
             architecture and living.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
         <div className="absolute bottom-40   p-6 md:p-10 flex-col lg:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10">
@@ -400,7 +442,7 @@ export default function Header() {
               With a commitment to excellence, we craft architectural
               masterpieces that inspire and endure. Every project reflects
             </p>
-            <div className="space-y-1">
+            <div className="space-y-5">
               <a
                 href="mailto:hello@example.com"
                 className="block  hover:text-yellow-400"
