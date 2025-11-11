@@ -34,29 +34,27 @@ const servicesData = [
 
 const ServiceItem = ({ number, title, description, details }) => (
   <div className="flex flex-col md:flex-row py-12 md:items-start">
-    {/* Left Column: Number and Title */}
-    <div className="w-full md:w-1/12 flex items-center md:items-start md:pr-8 pt-0 md:pt-2 mb-6 md:mb-0">
-      <p className="text-3xl font-medium text-gray-400 md:mb-3">{number}</p>
+    {/* Left Column: Number and Title side by side */}
+    <div className="w-full md:w-3/6 flex lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
+      <p className="text-3xl font-medium text-gray-400 mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
+        {number}
+      </p>
+      <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight">
+        {title}
+      </h3>
     </div>
-    <div className="lg:flex ">
-      <div className="w-full md:w-1/3 flex-1 md:flex-col items-start md:items-start md:pr-12 mb-6 md:mb-0">
-        <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight md:whitespace-nowrap">
-          {title}
-        </h3>
-      </div>
 
-      {/* Right Column: Description and Details */}
-      <div className="w-full md:w-2/3 flex-1">
-        <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed">
-          {description}
-        </p>
+    {/* Right Column: Description and Details */}
+    <div className="w-full md:w-2/3 flex-1">
+      <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed">
+        {description}
+      </p>
 
-        <ul className="space-y-1 text-[.875rem]  text-gray-600 tracking-widest font-satoshi font-medium uppercase">
-          {details.map((detail, index) => (
-            <li key={index}>{detail}</li>
-          ))}
-        </ul>
-      </div>
+      <ul className="space-y-1 text-[.875rem] text-gray-600 tracking-widest font-satoshi font-medium uppercase">
+        {details.map((detail, index) => (
+          <li key={index}>{detail}</li>
+        ))}
+      </ul>
     </div>
   </div>
 );

@@ -321,7 +321,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="relative mx-auto w-[94vw] md:w-[96vw] md:h-[190vh] lg:h-[292vh] rounded-t-[70px] overflow-hidden"
+      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[292vh] rounded-t-[70px] overflow-hidden"
     >
       {/* Static Zoomed Background Image */}
       <div
@@ -381,14 +381,14 @@ export default function Header() {
       <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
         <motion.div
-          className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[5vw] md:mt-[16vw] lg:mt-[25vw] mb-56 z-10"
+          className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[5vw] md:mt-[20vw] lg:mt-[25vw] mb-56 z-10"
           variants={container}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
             variants={item}
-            className="text-7xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 mt-20"
+            className="text-5xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 md:mt-20"
           >
             <motion.span variants={item} className="block">
               YOUR
@@ -411,7 +411,7 @@ export default function Header() {
         </motion.div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
-        <div className="absolute bottom-40   p-6 md:p-10 flex-col lg:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10">
+        <div className="absolute bottom-40 p-6 md:p-10 flex-col lg:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36">
           <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-serif  mb-3 leading-tight">
               We love & live <br /> architecture
@@ -438,14 +438,14 @@ export default function Header() {
               Arkitect creates luxurious, modern spaces where innovation meets
               timeless elegance. Our designs push boundaries.
             </p>
-            <p>
+            <p className="pb-2 sm:pb-4">
               With a commitment to excellence, we craft architectural
               masterpieces that inspire and endure. Every project reflects
             </p>
-            <div className="space-y-5">
+            <div className="space-y-4">
               <a
                 href="mailto:hello@example.com"
-                className="block  hover:text-yellow-400"
+                className="block  hover:text-yellow-400 pb-2 sm:pb-4"
               >
                 hello@example.com
               </a>

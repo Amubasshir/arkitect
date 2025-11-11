@@ -93,10 +93,13 @@ const TeamMemberRow = ({ member }) => {
       </div>
 
       {/* Right Section (Title + Socials) */}
-      <div className="flex flex-col items-center sm:items-end mt-4 sm:mt-0 space-y-3">
-        <p className="text-sm md:text-base uppercase tracking-widest text-black font-medium whitespace-nowrap text-center sm:text-right">
-          {member.title}
-        </p>
+      <div className="flex flex-col md:flex-row lg:gap-20 items-center sm:items-end mt-4 sm:mt-0 space-y-3">
+        <div>
+          <p className="text-sm md:text-base uppercase tracking-widest text-black font-medium whitespace-nowrap text-center sm:text-right">
+            {member.title}
+          </p>
+        </div>
+
         <div className="flex space-x-3">
           <a
             href={member.socials.twitter}

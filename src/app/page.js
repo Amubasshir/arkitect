@@ -12,13 +12,13 @@ import TeamSection from '@/Components/TeamSection';
 export default function HomePage() {
   return (
     <>
-      <div className="bg-black text-white px-4 pt-4 relative overflow-hidden">
+      <div className="bg-black text-white px-2 pt-4 relative overflow-hidden">
         <div className="">
           <div className="">
             <Navbar></Navbar>
           </div>
 
-          <div className="-mt-16 relative">
+          <div className="md:-mt-16 -mt-52 relative">
             <ServicesSection></ServicesSection>
           </div>
         </div>

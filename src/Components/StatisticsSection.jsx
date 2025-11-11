@@ -30,7 +30,7 @@ const statsData = [
 // Reusable component for a single statistic card
 const StatCard = ({ stat }) => {
   return (
-    <div className="bg-gray-100 p-[2rem] sm:p-[2.5rem] md:p-[3rem] rounded-4xl flex flex-col justify-start gap-4">
+    <div className="bg-[#f8f8f8] p-[2rem] sm:p-[2.5rem] md:p-[3rem] rounded-4xl flex flex-col justify-start gap-4">
       <p className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900">
         {stat.percent}
       </p>
@@ -47,7 +47,7 @@ const StatCard = ({ stat }) => {
 export default function StatisticsSection() {
   return (
     <section className="bg-white py-16 sm:py-20 px-4 sm:px-8 lg:px-16 flex justify-center">
-      <div className=" mx-auto flex flex-col lg:flex-row gap-10 md:gap-14 mt-20">
+      <div className=" mx-auto flex flex-col lg:flex-row gap-10 md:gap-20 mt-20">
         {/* Left Column */}
         <div className="flex flex-col justify-start pt-4 lg:pr-20">
           <h2 className="text-3xl sm:text-4xl md:text-[4rem] font-bold text-gray-900 mb-6 leading-tight">
