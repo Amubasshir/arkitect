@@ -42,7 +42,7 @@ export default function Header() {
     gsap.set(cursor, {
       scale: 1.1,
       backgroundColor: '#000',
-      opacity: 0,
+      opacity: 1,
       x: -9999,
       y: -9999,
     });
@@ -135,22 +135,6 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 300);
   };
 
-  // const container = {
-  //   hidden: {},
-  //   visible: {
-  //     transition: { staggerChildren: 0.25, delayChildren: 0.1 },
-  //   },
-  // };
-
-  // const item = {
-  //   hidden: { y: 40, opacity: 0, scale: 0.95 },
-  //   visible: {
-  //     y: 0,
-  //     opacity: 1,
-  //     scale: 1,
-  //     transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
-  //   },
-  // };
   const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.15 } },
@@ -170,13 +154,13 @@ export default function Header() {
       <nav className="fixed top-16 flex items-center bg-[#1A1A1A] text-white px-4 py-2 rounded-full shadow-lg font-satoshi  md:justify-between w-auto overflow-visible z-50">
         {/* Nav links */}
         <ul className="hidden lg:flex items-center text-sm font-medium">
-          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
             Projects
           </li>
-          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
             Services
           </li>
-          <li className="cursor-pointer px-5 py-3  font-light hover:bg-gray-600 rounded-full">
+          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
             About
           </li>
         </ul>
@@ -188,7 +172,7 @@ export default function Header() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <span className="flex items-center gap-1 px-5 py-3 font-light hover:bg-gray-600 rounded-full">
+            <span className="flex items-center gap-1 px-5 py-3 font-light hover:bg-gray-600 rounded-full text-lg">
               Pages <FiChevronDown size={14} />
             </span>
 
@@ -321,7 +305,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[292vh] lg:rounded-t-[70px] md:rounded-t-[60px] rounded-t-[50px] overflow-hidden"
+      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[292vh] lg:rounded-t-[80px] md:rounded-t-[60px] rounded-t-[50px] overflow-hidden"
     >
       {/* Static Zoomed Background Image */}
       <div
@@ -332,6 +316,18 @@ export default function Header() {
         }}
       ></div>
 
+      <div
+        ref={cursorRef}
+        // Added background color, padding, and flex centering for the text
+        className="fixed top-0 left-0 w-16 h-16 px-4 py-2 
+                  rounded-full text-white text-sm font-semibold 
+                  flex items-center justify-center whitespace-nowrap 
+                    pointer-events-none z-[9999] opacity-100 
+                       transform -translate-x-1/2 -translate-y-1/2
+                             transition-all duration-200 ease-out"
+      >
+        Scroll
+      </div>
       {/* Optional dark overlay */}
       <div className="absolute inset-0 bg-black/15 rounded-t-[60px] pointer-events-none"></div>
 
@@ -381,22 +377,28 @@ export default function Header() {
       <div className="flex flex-col justify-center items-center md:h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
         <motion.div
-          className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[5vw] md:mt-[20vw] lg:mt-[25vw] mb-56 z-10"
+          className="hero-content flex flex-col text-center max-w-5xl px-4 mt-[5vw] md:mt-[15vw] lg:mt-[25vw] mb-56 z-10"
           variants={container}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
             variants={item}
-            className="text-6xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 md:mt-20"
+            className="text-5xl font-light space-y-4 md:text-8xl lg:text-[175px] font-serif leading-none mb-6 md:mt-20"
           >
-            <motion.span variants={item} className="block">
+            <motion.span
+              variants={item}
+              className="block font-[Satoshi] font-medium"
+            >
               YOUR
             </motion.span>
-            <motion.span variants={item} className="block">
+            <motion.span variants={item} className="block font-[Zodiak]">
               DREAM
             </motion.span>
-            <motion.span variants={item} className="block">
+            <motion.span
+              variants={item}
+              className="block font-[Satoshi] font-medium"
+            >
               PLACE
             </motion.span>
           </motion.h1>
@@ -413,7 +415,7 @@ export default function Header() {
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
         <div className="absolute bottom-40 lg:bottom-40 md:-bottom-1 p-6 md:p-10 md:pb-[90px] flex-col md:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36 md:mt-20 lg:mt-36">
           <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-serif  mb-3 leading-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[Satoshi] font-medium  mb-3 leading-tight">
               We love & live <br /> architecture
             </h2>
             <div className="flex space-x-2 text-sm cursor-pointer items-center gap-4 mt-16">

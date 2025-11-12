@@ -8,7 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 const projectData = [
   {
     id: 1,
-    title: 'OCEAN WAVE',
+    title: 'OCEAN',
+    title2: 'WAVE',
     description:
       'A flowing, organic design inspired by the movement and rhythm of the sea.',
     image:
@@ -16,7 +17,8 @@ const projectData = [
   },
   {
     id: 2,
-    title: 'Puzzle Tower',
+    title: 'Puzzle',
+    title2: 'Tower',
     description:
       'A bold, modular design redefining vertical living with dynamic, interlocking structures.',
     image:
@@ -24,7 +26,8 @@ const projectData = [
   },
   {
     id: 3,
-    title: 'HONEY COMB',
+    title: 'HONEY',
+    title2: 'COMB',
     description:
       'A fusion of complex structure featuring a honeycomb design for beauty and efficiency.',
     image:
@@ -32,7 +35,8 @@ const projectData = [
   },
   {
     id: 4,
-    title: 'Waves House',
+    title: 'Waves',
+    title2: 'House',
     description:
       'A vibrant architectural statement blending modern aesthetics with captivating design.',
     image:
@@ -40,7 +44,8 @@ const projectData = [
   },
   {
     id: 5,
-    title: 'YELLOW SUITS',
+    title: 'YELLOW',
+    title2: 'SUITES',
     description:
       'A vibrant architectural statement blending modern aesthetics with captivating design.',
     image:
@@ -82,7 +87,7 @@ export default function ShowcaseGSAP() {
       gsap.to(cursor, {
         x: e.clientX - 25,
         y: e.clientY - 25,
-        duration: 0.2,
+        duration: 0,
         ease: 'power3.out',
         backgroundColor: '#000000',
       });
@@ -95,7 +100,7 @@ export default function ShowcaseGSAP() {
         gsap.to(cursor, {
           scale: 1,
           opacity: 1,
-          duration: 0.3,
+          duration: 0,
           backgroundColor: 'rgba(255,255,255,0.3)',
         });
       });
@@ -129,7 +134,7 @@ export default function ShowcaseGSAP() {
       {/* Showcase Cards */}
       {projectData.map((project, index) => (
         <div key={project.id}>
-          <div className="pin-card relative w-full h-[45vh] lg:h-[50vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] ">
+          <div className="pin-card relative w-full h-[45vh] lg:h-[58vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] ">
             <img
               src={project.image}
               alt={project.title}
@@ -143,18 +148,18 @@ export default function ShowcaseGSAP() {
                 {/* Title and Description */}
                 <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
                   <div className="max-w-full sm:max-w-md">
-                    <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-medium mb-4 tracking-tight uppercase text-gray-100 leading-tight w-40 md:w-full">
-                      {project.title}
+                    <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[150px] font-medium mb-4 -tracking-tighter  uppercase text-gray-100 w-40 md:w-full">
+                      {project.title}{' '}
+                      <span className="font-[Zodiak]"> {project.title2}</span>
                     </h2>
-                    <p className="text-2xl md:text-xl font-medium max-w-xs text-white/90 w-72 md:w-full space-y-8">
+                    <p className="text-2xl md:text-3xl font-medium  text-white/90 w-72 md:w-full space-y-8">
                       {project.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Bottom Section */}
-                {/* Bottom Section */}
-                <div className="flex flex-col sm:flex-row justify-between md:items-end gap-4 sm:gap-0">
+                <div className="flex flex-col sm:flex-row justify-between md:items-end gap-4 sm:gap-0 md:pt-28">
                   {/* Left side buttons */}
                   <div className="md:flex flex-wrap gap-2 text-[8px] sm:text-[10px] font-semibold hidden ">
                     {project.btn && (

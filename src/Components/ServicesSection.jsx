@@ -36,18 +36,18 @@ const ServiceItem = ({ number, title, description, details }) => (
   <div className="flex flex-col-2 md:flex-row py-12 items-start">
     {/* Left Column: Number and Title side by side */}
     <div className=" w-16 md:w-30 flex lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
-      <p className="text-3xl font-medium text-gray-400 mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
+      <p className="text-3xl font-medium text-black mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
         {number}
       </p>
     </div>
 
     {/* Right Column: Description and Details */}
     <div className="w-full  flex-1 md:flex space-y-6">
-      <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight md:w-[470px] mb-4">
+      <h3 className="text-3xl md:text-4xl font-[Satoshi] font-medium text-black leading-tight md:w-[470px] mb-4">
         {title}
       </h3>
 
-      <div className="flex flex-col md:w-[470px]">
+      <div className="flex flex-col md:w-[670px]">
         <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed ">
           {description}
         </p>
@@ -66,7 +66,7 @@ export default function ServicesSection() {
   return (
     <section className="bg-white py-20 px-4 sm:px-8 lg:px-16 rounded-t-[60px] shadow-md">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center md:mb-16">
+        <div className="text-center md:mb-10 md:mt-12">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
             OUR SERVICES
           </p>

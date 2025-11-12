@@ -10,7 +10,7 @@ export default function CtaSection() {
         </p>
 
         {/* Headline */}
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-10 max-w-4xl leading-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-[65px] font-[Satoshi] font-bold text-gray-900 mb-10 max-w-4xl leading-tight">
           Curious about what we can do for you?
         </h2>
 

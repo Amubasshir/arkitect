@@ -65,7 +65,7 @@ const TeamMemberRow = ({ member }) => {
       {/* Left Section (Image/Video + Name) */}
       <div className="flex flex-col sm:flex-row items-center sm:space-x-6 lg:space-x-10 w-full sm:w-auto">
         {/* Video / Image */}
-        <div className="w-full sm:w-40 sm:h-40 h-64 rounded-2xl overflow-hidden border-b bg-gray-200">
+        <div className="w-full sm:w-40 sm:h-40 h-72 rounded-2xl overflow-hidden border-b bg-gray-200">
           {!videoError && member.videoUrl ? (
             <video
               autoPlay
@@ -87,7 +87,7 @@ const TeamMemberRow = ({ member }) => {
         </div>
 
         {/* Name (for mobile, below video) */}
-        <h3 className="text-xl md:text-3xl font-light text-gray-900 font-serif mt-4 sm:mt-0 text-center sm:text-left">
+        <h3 className="text-xl md:text-[32px] font-medium text-gray-900 font-[Satoshi] mt-4 sm:mt-0 text-center sm:text-left">
           {member.name}
         </h3>
       </div>
@@ -95,7 +95,7 @@ const TeamMemberRow = ({ member }) => {
       {/* Right Section (Title + Socials) */}
       <div className="flex flex-col md:flex-row lg:gap-20 items-center sm:items-end mt-4 sm:mt-0 space-y-3">
         <div>
-          <p className="text-sm md:text-base uppercase tracking-widest text-black font-medium whitespace-nowrap text-center sm:text-right">
+          <p className="text-lg md:text-base uppercase tracking-widest text-black font-medium whitespace-nowrap text-center sm:text-right">
             {member.title}
           </p>
         </div>

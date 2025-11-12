@@ -5,6 +5,21 @@
   --foreground: #171717;
   --font-satoshi: 'Satoshi', sans-serif;
 }
+@font-face {
+  font-family: 'Zodiak';
+
+  src: url(../../public/fonts/Zodiak-Regular.otf);
+}
+@font-face {
+  font-family: 'Satoshi';
+
+  src: url(../../public/font2/Satoshi-Bold.otf);
+}
+@font-face {
+  font-family: 'Satoshi2';
+
+  src: url(../../public/font2/Satoshi-Regular.ttf);
+}
 
 @theme inline {
   --color-background: var(--background);

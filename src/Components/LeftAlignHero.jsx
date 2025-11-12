@@ -21,17 +21,17 @@ export default function LeftAlignHero() {
         <div className="max-w-4xl mx-auto lg:mx-0 text-center lg:text-left text-white ">
           {/* Main Title */}
           <h1 className="leading-2 mb-6 tracking-tight  font-bold mt-20">
-            <span className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-medium">
+            <span className="text-5xl sm:text-6xl md:text-xl lg:text-9xl font-medium font-[Zodiak]">
               INNOVATIVE
             </span>{' '}
             <br />
-            <span className="font-bold text-5xl sm:text-6xl md:text-8xl lg:text-9xl">
+            <span className="font-semibold text-5xl sm:text-6xl md:text-8xl lg:text-9xl">
               DESIGN
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-xl md:text-2xl  max-w-xl font-medium mx-auto lg:mx-0 mb-12">
+          <p className="text-xl md:text-3xl  max-w-3xl font-medium mx-auto lg:mx-0 mb-12">
             With a clear plan in place, we craft a sophisticated design that
             blends aesthetics, functionality, and innovation.
           </p>
