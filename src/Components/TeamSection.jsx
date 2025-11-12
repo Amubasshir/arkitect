@@ -65,7 +65,7 @@ const TeamMemberRow = ({ member }) => {
       {/* Left Section (Image/Video + Name) */}
       <div className="flex flex-col sm:flex-row items-center sm:space-x-6 lg:space-x-10 w-full sm:w-auto">
         {/* Video / Image */}
-        <div className="w-full sm:w-40 sm:h-40 h-64 rounded-2xl overflow-hidden shadow-md bg-gray-200">
+        <div className="w-full sm:w-40 sm:h-40 h-64 rounded-2xl overflow-hidden border-b bg-gray-200">
           {!videoError && member.videoUrl ? (
             <video
               autoPlay
@@ -141,7 +141,7 @@ export default function TeamSection() {
           {teamData.map(member => (
             <div
               key={member.id}
-              className="bg-gray-50 sm:bg-transparent rounded-3xl sm:rounded-none p-6 sm:p-0 shadow-md sm:shadow-none"
+              className=" sm:bg-transparent  sm:rounded-none p-6 sm:p-0 border-b border-gray-200 "
             >
               <TeamMemberRow member={member} />
             </div>

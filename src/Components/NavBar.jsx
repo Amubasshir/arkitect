@@ -411,7 +411,7 @@ export default function Header() {
         </motion.div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
-        <div className="absolute bottom-40 p-6 md:p-10 flex-col lg:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36">
+        <div className="absolute bottom-40 lg:bottom-40 md:-bottom-1 p-6 md:p-10 md:pb-[90px] flex-col md:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36 md:mt-20 lg:mt-36">
           <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-serif  mb-3 leading-tight">
               We love & live <br /> architecture
@@ -433,7 +433,7 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className="flex-1 space-y-4 text-start text-base sm:text-ms md:text-lg lg:text-3xl max-w-full ">
+          <div className="flex-1 lg:space-y-4 text-start text-base sm:text-ms md:text-lg lg:text-3xl max-w-full ">
             <p className="pb-2 sm:pb-4">
               Arkitect creates luxurious, modern spaces where innovation meets
               timeless elegance. Our designs push boundaries.
@@ -442,7 +442,7 @@ export default function Header() {
               With a commitment to excellence, we craft architectural
               masterpieces that inspire and endure. Every project reflects
             </p>
-            <div className="space-y-4">
+            <div className="lg:space-y-4">
               <a
                 href="mailto:hello@example.com"
                 className="block  hover:text-yellow-400 pb-2 sm:pb-4"

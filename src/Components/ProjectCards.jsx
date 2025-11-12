@@ -129,14 +129,14 @@ export default function ShowcaseGSAP() {
       {/* Showcase Cards */}
       {projectData.map((project, index) => (
         <div key={project.id}>
-          <div className="pin-card relative w-full h-[70vh] lg:h-[50vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden">
+          <div className="pin-card relative w-full h-[70vh] lg:h-[50vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] lg:full">
             <img
               src={project.image}
               alt={project.title}
               className="absolute inset-0 w-full h-full object-cover rounded-[40px] sm:rounded-[60px]"
               style={{ objectPosition: 'center' }}
             />
-            <div className="absolute inset-0 bg-black/30 rounded-[40px] sm:rounded-[60px]" />
+            <div className="absolute inset-0 bg-black/30 rounded-[40px] sm:rounded-[60px] " />
 
             <div className="absolute inset-0 text-white">
               <div className="flex flex-col h-full w-full p-6 sm:p-16 lg:p-24 justify-between">
