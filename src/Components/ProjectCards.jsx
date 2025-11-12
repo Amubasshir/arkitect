@@ -129,7 +129,7 @@ export default function ShowcaseGSAP() {
       {/* Showcase Cards */}
       {projectData.map((project, index) => (
         <div key={project.id}>
-          <div className="pin-card relative w-full h-[70vh] lg:h-[50vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] lg:full">
+          <div className="pin-card relative w-full h-[45vh] lg:h-[50vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] ">
             <img
               src={project.image}
               alt={project.title}
@@ -139,14 +139,14 @@ export default function ShowcaseGSAP() {
             <div className="absolute inset-0 bg-black/30 rounded-[40px] sm:rounded-[60px] " />
 
             <div className="absolute inset-0 text-white">
-              <div className="flex flex-col h-full w-full p-6 sm:p-16 lg:p-24 justify-between">
+              <div className="flex flex-col h-full w-full p-10 sm:p-16 lg:p-24 justify-between">
                 {/* Title and Description */}
                 <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
                   <div className="max-w-full sm:max-w-md">
                     <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-medium mb-4 tracking-tight uppercase text-gray-100 leading-tight w-40 md:w-full">
                       {project.title}
                     </h2>
-                    <p className="text-lg  md:text-xl font-medium max-w-xs text-white/90 w-72 md:w-full space-y-8">
+                    <p className="text-2xl md:text-xl font-medium max-w-xs text-white/90 w-72 md:w-full space-y-8">
                       {project.description}
                     </p>
                   </div>
@@ -171,7 +171,7 @@ export default function ShowcaseGSAP() {
 
                   {/* Main Button */}
                   <div
-                    className={`mt-2 sm:mt-0 w-24 md:w-29  px-5 py-3 border border-white rounded-full text-[10px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
+                    className={`mt-2 sm:mt-0 w-36 lg:w-35 md:w-29  px-8 py-3 border border-white rounded-full text-[16px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
       ${index === projectData.length - 1 ? 'block' : 'block sm:hidden'}`}
                   >
                     {project.button || 'EXPLORE'}

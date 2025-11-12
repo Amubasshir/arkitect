@@ -18,13 +18,11 @@ export default function HomePage() {
             <Navbar></Navbar>
           </div>
 
-          <div className="md:-mt-16 -mt-52 relative">
+          <div className="md:-mt-16 -mt-36 relative">
             <ServicesSection></ServicesSection>
           </div>
         </div>
-
         <ProjectCards></ProjectCards>
-
         <StatisticsSection></StatisticsSection>
         <TeamSection></TeamSection>
         <LeftAlignHero></LeftAlignHero>

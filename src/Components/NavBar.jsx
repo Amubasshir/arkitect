@@ -321,7 +321,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[292vh] rounded-t-[70px] overflow-hidden"
+      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[292vh] lg:rounded-t-[70px] md:rounded-t-[60px] rounded-t-[50px] overflow-hidden"
     >
       {/* Static Zoomed Background Image */}
       <div
@@ -378,7 +378,7 @@ export default function Header() {
       </div>
 
       {/* Hero Content (To be animated) */}
-      <div className="flex flex-col justify-center items-center h-screen text-white text-center px-4">
+      <div className="flex flex-col justify-center items-center md:h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
         <motion.div
           className="hero-content flex flex-col text-center max-w-4xl px-4 mt-[5vw] md:mt-[20vw] lg:mt-[25vw] mb-56 z-10"
@@ -388,7 +388,7 @@ export default function Header() {
         >
           <motion.h1
             variants={item}
-            className="text-5xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 md:mt-20"
+            className="text-6xl font-light md:text-8xl lg:text-[150px] font-serif leading-none mb-6 md:mt-20"
           >
             <motion.span variants={item} className="block">
               YOUR

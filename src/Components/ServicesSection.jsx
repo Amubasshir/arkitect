@@ -33,28 +33,31 @@ const servicesData = [
 ];
 
 const ServiceItem = ({ number, title, description, details }) => (
-  <div className="flex flex-col md:flex-row py-12 md:items-start">
+  <div className="flex flex-col-2 md:flex-row py-12 items-start">
     {/* Left Column: Number and Title side by side */}
-    <div className="w-full md:w-3/6 flex lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
+    <div className=" w-16 md:w-30 flex lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
       <p className="text-3xl font-medium text-gray-400 mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
         {number}
       </p>
-      <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight">
-        {title}
-      </h3>
     </div>
 
     {/* Right Column: Description and Details */}
-    <div className="w-full md:w-2/3 flex-1">
-      <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed">
-        {description}
-      </p>
+    <div className="w-full  flex-1 md:flex space-y-6">
+      <h3 className="text-3xl md:text-4xl font-serif font-medium text-gray-800 leading-tight md:w-[470px] mb-4">
+        {title}
+      </h3>
 
-      <ul className="space-y-1 text-[.875rem] text-gray-600 tracking-widest font-satoshi font-medium uppercase">
-        {details.map((detail, index) => (
-          <li key={index}>{detail}</li>
-        ))}
-      </ul>
+      <div className="flex flex-col md:w-[470px]">
+        <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed ">
+          {description}
+        </p>
+
+        <ul className="space-y-4 text-[.875rem] text-gray-600 tracking-widest font-satoshi font-medium uppercase">
+          {details.map((detail, index) => (
+            <li key={index}>{detail}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 );
@@ -63,7 +66,7 @@ export default function ServicesSection() {
   return (
     <section className="bg-white py-20 px-4 sm:px-8 lg:px-16 rounded-t-[60px] shadow-md">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center md:mb-16">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
             OUR SERVICES
           </p>
