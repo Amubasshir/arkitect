@@ -62,7 +62,7 @@ export default function ShowcaseGSAP() {
 
   useEffect(() => {
     // Clear old triggers
-    ScrollTrigger.getAll().forEach(t => t.kill());
+    ScrollTrigger.getAll().forEach((t) => t.kill());
 
     const sections = gsap.utils.toArray('.pin-card');
 
@@ -83,7 +83,7 @@ export default function ShowcaseGSAP() {
     // Cursor animation
     const cursor = cursorRef.current;
 
-    const moveCursor = e => {
+    const moveCursor = (e) => {
       gsap.to(cursor, {
         x: e.clientX - 25,
         y: e.clientY - 25,
@@ -95,7 +95,7 @@ export default function ShowcaseGSAP() {
 
     const cards = document.querySelectorAll('.pin-card');
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       card.addEventListener('mouseenter', () => {
         gsap.to(cursor, {
           scale: 1,
@@ -116,12 +116,15 @@ export default function ShowcaseGSAP() {
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   return (
-    <div ref={containerRef} className="relative bg-white w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
+    <div
+      ref={containerRef}
+      className="relative bg-white w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto"
+    >
       {/* Custom Cursor */}
       <div
         ref={cursorRef}
@@ -176,7 +179,7 @@ export default function ShowcaseGSAP() {
 
                   {/* Main Button */}
                   <div
-                    className={`mt-14 sm:mt-7  w-36 lg:w-35 md:w-29 text-center px-4 py-2 border border-white rounded-full text-[12px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
+                    className={`mt-6   sm:mt-7  w-36 lg:w-35 md:w-29 text-center px-4 py-2 border border-white rounded-full text-[12px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
       ${index === projectData.length - 1 ? 'block' : 'block sm:hidden'}`}
                   >
                     {project.button || 'EXPLORE'}

@@ -336,8 +336,8 @@ export default function Header() {
       <div className=" top-10 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white ">
         <div className="flex items-center gap-8 w-full justify-between z-30 mt-6">
           <div className="flex">
-            <div className="font-bold text-xl border-white px-3 py-1 cursor-pointer">
-              arkitect
+            <div className="font-light leading-relaxed text-2xl border-white px-3 py-1 cursor-pointer font-[Satoshi]">
+              arkitect®
             </div>
           </div>
 
@@ -407,7 +407,7 @@ export default function Header() {
 
           <motion.p
             variants={item}
-            className="text-2xl max-w-md font-satoshi text-center mx-auto mt-20"
+            className="text-2xl max-w-md font-satoshi text-center mx-auto md:mt-20 mt-8"
           >
             Designing timeless, luxurious spaces that redefine modern
             architecture and living.
