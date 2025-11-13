@@ -151,16 +151,16 @@ export default function Header() {
 
   const NavPillContent = () => {
     return (
-      <nav className="fixed top-16 flex items-center bg-[#1A1A1A] text-white px-4 py-2 rounded-full shadow-lg font-satoshi  md:justify-between w-auto overflow-visible z-50">
+      <nav className="fixed top-14 flex items-center bg-[#1A1A1A] text-white px-4 py-2 rounded-full shadow-lg font-satoshi  md:justify-between w-auto overflow-visible z-50">
         {/* Nav links */}
         <ul className="hidden lg:flex items-center text-sm font-medium">
-          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
+          <li className="cursor-pointer px-5 py-3  font-light  hover:bg-gray-600 rounded-full text-lg">
             Projects
           </li>
-          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
+          <li className="cursor-pointer px-5 py-3  font-light  hover:bg-gray-600 rounded-full text-lg">
             Services
           </li>
-          <li className="cursor-pointer px-5 py-3  font-light md:font-medium hover:bg-gray-600 rounded-full text-lg">
+          <li className="cursor-pointer px-5 py-3  font-light  hover:bg-gray-600 rounded-full text-lg">
             About
           </li>
         </ul>
@@ -305,7 +305,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="relative mx-auto w-[96vw] sm:w-[93vw] md:w-[97vw] md:h-[190vh] lg:h-[222vh] lg:rounded-t-[80px] md:rounded-t-[60px] rounded-t-[50px] overflow-hidden"
+      className="relative mx-auto w-[90vw] sm:w-[93vw] md:w-[96vw] md:h-[190vh] lg:h-[292vh] lg:rounded-t-[80px] md:rounded-t-[60px] rounded-t-[50px] overflow-hidden"
     >
       {/* Static Zoomed Background Image */}
       <div
@@ -335,7 +335,10 @@ export default function Header() {
         <div className="flex items-center gap-8 w-full justify-between z-30 mt-6">
           <div className="flex">
             <div className="font-bold text-xl border-white px-3 py-1 cursor-pointer">
-              arkitect
+              <img
+                src="https://cdn.prod.website-files.com/634e3ae6f7e032d01b5e7fa7/635ae3f3d93852bafce37ee4_logo-inverse.svg"
+                alt=""
+              />
             </div>
           </div>
 
@@ -377,7 +380,7 @@ export default function Header() {
       <div className="flex flex-col justify-center items-center md:h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
         <motion.div
-          className="hero-content flex flex-col text-center max-w-5xl px-4 mt-[5vw] md:mt-[10vw] lg:mt-[10vw] mb-56 z-10"
+          className="hero-content flex flex-col text-center max-w-5xl px-4 mt-[5vw] md:mt-[10vw] lg:mt-[28vw] mb-56 z-10"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -405,7 +408,7 @@ export default function Header() {
 
           <motion.p
             variants={item}
-            className="text-2xl max-w-md font-satoshi text-center mx-auto"
+            className="text-2xl max-w-md font-satoshi text-center mx-auto mt=[30px]"
           >
             Designing timeless, luxurious spaces that redefine modern
             architecture and living.
@@ -413,7 +416,7 @@ export default function Header() {
         </motion.div>
 
         {/* Bottom Left & Right Content (Part of hero-content animation) */}
-        <div className="absolute bottom-40 lg:bottom-40 md:-bottom-1 p-6 md:p-10 md:pb-[90px] flex-col md:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36 md:mt-20 lg:mt-36">
+        <div className="absolute bottom-40 lg:bottom-30 md:-bottom-1 p-6 md:p-10 md:pb-[92px] flex-col md:flex-row justify-center  w-full gap-20 lg:gap-16 hidden md:flex  z-10 mt-36 md:mt-20 lg:mt-36">
           <div className="relative flex-1 flex-col items-start space-y-4 ml-0 md:ml-10 text-left h-full">
             <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[Satoshi] font-medium  mb-3 leading-tight">
               We love & live <br /> architecture

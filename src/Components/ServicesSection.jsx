@@ -33,26 +33,28 @@ const servicesData = [
 ];
 
 const ServiceItem = ({ number, title, description, details }) => (
-  <div className="flex flex-col-2 md:flex-row py-12 items-start">
-    {/* Left Column: Number and Title side by side */}
-    <div className=" w-16 md:w-30 flex font-[Zodiak] lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
-      <p className="text-3xl font-medium text-black mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
+  <div className="flex flex-col md:flex-row py-12 items-start md:items-start gap-6 md:gap-10">
+    {/* Left Column: Number */}
+    <div className="flex font-[Zodiak] items-start md:items-center md:pr-8">
+      <p className="text-3xl md:text-4xl font-medium text-black mr-4 md:mr-6 lg:mr-10 md:pt-2">
         {number}
       </p>
     </div>
 
-    {/* Right Column: Description and Details */}
-    <div className="w-full  flex-1 md:flex space-y-6">
-      <h3 className="text-3xl md:text-4xl font-[Satoshi] font-medium text-black leading-tight md:w-[470px] mb-4">
+    {/* Right Column: Title, Description, and Details */}
+    <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 w-full">
+      {/* Title */}
+      <h3 className="text-2xl sm:text-3xl md:text-4xl font-[Satoshi] font-medium text-black leading-tight lg:w-[420px]">
         {title}
       </h3>
 
-      <div className="flex flex-col md:w-[670px]">
-        <p className="text-xl text-gray-700 font-medium mb-6 leading-relaxed ">
+      {/* Description + Details */}
+      <div className="flex flex-col gap-6 lg:flex-1">
+        <p className="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
           {description}
         </p>
 
-        <ul className="space-y-4 text-[.875rem] text-gray-600 tracking-widest font-satoshi font-medium uppercase">
+        <ul className="space-y-3 text-xs sm:text-sm md:text-[.875rem] text-gray-600 tracking-widest font-[Satoshi] font-medium uppercase">
           {details.map((detail, index) => (
             <li key={index}>{detail}</li>
           ))}
