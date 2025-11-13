@@ -384,7 +384,7 @@ export default function Header() {
         >
           <motion.h1
             variants={item}
-            className="text-5xl font-light space-y-4 md:text-8xl lg:text-[175px] font-serif leading-none mb-6 md:mt-20"
+            className="text-5xl font-light space-y-4 md:text-8xl lg:text-[175px] font-serif leading-none mb-6 md:mt-10 "
           >
             <motion.span
               variants={item}
