@@ -134,7 +134,7 @@ export default function ShowcaseGSAP() {
       {/* Showcase Cards */}
       {projectData.map((project, index) => (
         <div key={project.id}>
-          <div className="pin-card relative w-full h-[45vh] lg:h-[58vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[480px] ">
+          <div className="pin-card relative w-full h-[45vh]  lg:h-[58vw] sm:h-[60vh] rounded-[40px] sm:rounded-[60px] cursor-none overflow-hidden md:h-[515px] ">
             <img
               src={project.image}
               alt={project.title}
@@ -144,22 +144,22 @@ export default function ShowcaseGSAP() {
             <div className="absolute inset-0 bg-[#191919]/30 rounded-[40px] sm:rounded-[60px] " />
 
             <div className="absolute inset-0 text-white">
-              <div className="flex flex-col h-full w-full p-10 sm:p-16 lg:p-24 justify-between">
+              <div className="flex flex-col h-[40vh] w-full p-10 sm:p-16 lg:p-24 justify-between">
                 {/* Title and Description */}
                 <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-4 sm:gap-0">
                   <div className="max-w-full sm:max-w-md">
-                    <h2 className="text-3xl sm:text-5xl md:text-8xl lg:text-[150px] font-medium md:mb-4 -tracking-tighter  uppercase text-gray-100 w-40 md:w-full">
+                    <h2 className="text-5xl sm:text-5xl md:text-8xl lg:text-[8rem] font-medium mb-8 md:mb-10 -tracking-tighter  uppercase text-gray-100 w-40 md:w-full">
                       {project.title}{' '}
                       <span className="font-[Zodiak]"> {project.title2}</span>
                     </h2>
-                    <p className="text-sm md:text-2xl font-medium  text-white/90 w-72 md:w-full space-y-8">
+                    <p className="text-2xl md:text-2xl font-medium  text-white/90 w-72 md:w-full space-y-8">
                       {project.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="flex flex-col sm:flex-row justify-between md:items-end gap-4 sm:gap-0 md:pt-5 lg:pt-0">
+                <div className="flex flex-col sm:flex-row justify-between md:items-end gap-4 sm:gap-0 md:pt-5 lg:pt-45">
                   {/* Left side buttons */}
                   <div className="md:flex flex-wrap gap-2 text-[8px] sm:text-[10px] font-semibold hidden ">
                     {project.btn && (
@@ -176,7 +176,7 @@ export default function ShowcaseGSAP() {
 
                   {/* Main Button */}
                   <div
-                    className={`mt-4 sm:mt-7  w-36 lg:w-35 md:w-29 text-center px-4 py-2 border border-white rounded-full text-[12px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
+                    className={`mt-14 sm:mt-7  w-36 lg:w-35 md:w-29 text-center px-4 py-2 border border-white rounded-full text-[12px] sm:text-[15px] font-semibold tracking-widest uppercase cursor-pointer backdrop-blur-sm bg-white hover:bg-white/30 transition text-black
       ${index === projectData.length - 1 ? 'block' : 'block sm:hidden'}`}
                   >
                     {project.button || 'EXPLORE'}

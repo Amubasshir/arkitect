@@ -33,7 +33,7 @@ const servicesData = [
 ];
 
 const ServiceItem = ({ number, title, description, details }) => (
-  <div className="flex flex-col md:flex-row py-12 items-start md:items-start gap-6 md:gap-10">
+  <div className="flex  py-12 items-start md:items-start gap-6 md:gap-10">
     {/* Left Column: Number */}
     <div className="flex font-[Zodiak] items-start md:items-center md:pr-8">
       <p className="text-3xl md:text-4xl font-medium text-black mr-4 md:mr-6 lg:mr-10 md:pt-2">
