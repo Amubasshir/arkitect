@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,7 +141,7 @@ export default function ShowcaseGSAP() {
               className="absolute inset-0 w-full h-full object-cover rounded-[40px] sm:rounded-[60px]"
               style={{ objectPosition: 'center' }}
             />
-            <div className="absolute inset-0 bg-black/30 rounded-[40px] sm:rounded-[60px] " />
+            <div className="absolute inset-0 bg-[#191919]/30 rounded-[40px] sm:rounded-[60px] " />
 
             <div className="absolute inset-0 text-white">
               <div className="flex flex-col h-full w-full p-10 sm:p-16 lg:p-24 justify-between">

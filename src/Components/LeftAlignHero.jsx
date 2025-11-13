@@ -1,4 +1,3 @@
-import React from 'react';
 
 const backgroundImage = {
   url: 'https://assets-global.website-files.com/634e3ae6f7e032d01b5e7fa7/635d47feb165560f5de1a788_home-story-bg.webp',
@@ -14,7 +13,7 @@ export default function LeftAlignHero() {
         alt={backgroundImage.alt}
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-[#191919]/15" />
 
       {/* Content Area */}
       <div className="relative z-10 w-full h-full lg:min-h-screen flex flex-col justify-end pb-20 px-6 sm:px-16 lg:px-20 mt-20">

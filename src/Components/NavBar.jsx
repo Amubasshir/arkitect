@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { FiChevronDown, FiMenu } from 'react-icons/fi';
 
-import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Import ScrollTrigger
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -329,7 +329,7 @@ export default function Header() {
         Scroll
       </div>
       {/* Optional dark overlay */}
-      <div className="absolute inset-0 bg-black/15 rounded-t-[60px] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[#191919]/15 rounded-t-[60px] pointer-events-none"></div>
 
       <div className=" top-10 left-0 w-full px-8 py-6 z-30 flex items-center justify-between text-white ">
         <div className="flex items-center gap-8 w-full justify-between z-30 mt-6">
