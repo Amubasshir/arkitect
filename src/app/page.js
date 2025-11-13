@@ -12,7 +12,7 @@ import TeamSection from '@/Components/TeamSection';
 export default function HomePage() {
   return (
     <>
-      <div className="bg-[#191919] text-white px-4 pt-4 relative overflow-hidden font-[Satoshi]">
+      <div className="bg-[#191919] text-white pt-4 relative overflow-hidden font-[Satoshi]">
         <div className="">
           <div className="">
             <Navbar></Navbar>
