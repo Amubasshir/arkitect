@@ -50,7 +50,7 @@ export default function StatisticsSection() {
       <div className=" mx-auto flex flex-col lg:flex-row gap-10 md:gap-20 mt-20">
         {/* Left Column */}
         <div className="flex flex-col justify-start pt-4 lg:pr-20">
-          <h2 className="text-3xl sm:text-4xl md:text-[4rem] font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-[4rem] font-semibold text-gray-900 mb-6 leading-tight">
             Architecture <br className="hidden md:inline" /> in Motion
           </h2>
           <p className="text-base sm:text-lg text-gray-700 mb-8 max-w-sm">

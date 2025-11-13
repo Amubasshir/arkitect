@@ -35,7 +35,7 @@ const servicesData = [
 const ServiceItem = ({ number, title, description, details }) => (
   <div className="flex flex-col-2 md:flex-row py-12 items-start">
     {/* Left Column: Number and Title side by side */}
-    <div className=" w-16 md:w-30 flex lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
+    <div className=" w-16 md:w-30 flex font-[Zodiak] lg:items-center md:items-start md:pr-8 mb-6 md:mb-0">
       <p className="text-3xl font-medium text-black mr-4 md:mr-6 lg:mr-10 md:pt-2 ">
         {number}
       </p>

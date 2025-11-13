@@ -31,7 +31,7 @@ export default function HomePage() {
         <div className="relative  bg-black px-4">
           <CtaSection></CtaSection>
         </div>
-        <div className="relative -mt-10">
+        <div className="relative -mt-0.5">
           <Footer></Footer>
         </div>
       </div>
