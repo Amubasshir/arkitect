@@ -18,7 +18,7 @@ export default function HomePage() {
             <Navbar></Navbar>
           </div>
 
-          <div className="md:-mt-16 -mt-36 relative">
+          <div className="md:-mt-16 -mt-36 relative w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
             <ServicesSection></ServicesSection>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function HomePage() {
         <LeftAlignHero></LeftAlignHero>
       </div>
       <div>
-        <div className="relative  bg-[#191919] px-4">
+        <div className="relative  bg-[#191919] ">
           <CtaSection></CtaSection>
         </div>
         <div className="relative -mt-0.5">

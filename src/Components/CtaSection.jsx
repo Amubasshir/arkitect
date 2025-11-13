@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CtaSection() {
   return (
-    <section className="bg-white rounded-b-[80px] md:h-screen flex items-center justify-center py-20 md:py-0">
+    <section className="bg-white rounded-b-[80px] md:h-screen flex items-center justify-center py-20 md:py-0 w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
       <div className="flex flex-col items-center justify-center text-center">
         {/* Subtitle */}
         <p className="text-sm uppercase tracking-[0.2em] font-medium text-gray-600 mb-6">

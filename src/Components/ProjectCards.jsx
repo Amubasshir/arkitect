@@ -121,7 +121,7 @@ export default function ShowcaseGSAP() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative bg-white ">
+    <div ref={containerRef} className="relative bg-white w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
       {/* Custom Cursor */}
       <div
         ref={cursorRef}

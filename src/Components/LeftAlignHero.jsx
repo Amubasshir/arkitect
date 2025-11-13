@@ -5,7 +5,7 @@ const backgroundImage = {
 
 export default function LeftAlignHero() {
   return (
-    <section className="relative w-full md:min-h-[140vh] min-h-[50vh] bg-gray-900 overflow-hidden">
+    <section className="relative md:min-h-[140vh] min-h-[50vh] bg-gray-900 overflow-hidden w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
       {/* Background Image */}
       <img
         src={backgroundImage.url}

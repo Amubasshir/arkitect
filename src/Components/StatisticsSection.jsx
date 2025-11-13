@@ -46,7 +46,7 @@ const StatCard = ({ stat }) => {
 
 export default function StatisticsSection() {
   return (
-    <section className="bg-white py-16 sm:py-20 px-4 sm:px-8 lg:px-16 flex justify-center">
+    <section className="bg-white py-16 sm:py-20 px-4 sm:px-8 lg:px-16 flex justify-center w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
       <div className=" mx-auto flex flex-col lg:flex-row gap-10 md:gap-20 mt-20">
         {/* Left Column */}
         <div className="flex flex-col justify-start pt-4 lg:pr-20">

@@ -127,7 +127,7 @@ const TeamMemberRow = ({ member }) => {
 
 export default function TeamSection() {
   return (
-    <section className="bg-white py-20 px-4 sm:px-8 lg:px-16">
+    <section className="bg-white py-20 px-4 sm:px-8 lg:px-16 w-[96vw] sm:w-[93vw] md:w-[97vw] mx-auto">
       <div className="mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

@@ -379,7 +379,7 @@ export default function Header() {
       <div className="flex flex-col justify-center items-center md:h-screen text-white text-center px-4">
         {/* Added class 'hero-content' for the GSAP target */}
         <motion.div
-          className="hero-content flex flex-col text-center max-w-5xl px-4 mt-[5vw] md:mt-[10vw] lg:mt-[10vw] mb-56 z-10"
+          className="hero-content flex flex-col text-center max-w-5xl px-4 mt-[5vw] md:mt-[12vw] lg:mt-[17vw] mb-56 z-10"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -407,7 +407,7 @@ export default function Header() {
 
           <motion.p
             variants={item}
-            className="text-2xl max-w-md font-satoshi text-center mx-auto "
+            className="text-2xl max-w-md font-satoshi text-center mx-auto mt-20"
           >
             Designing timeless, luxurious spaces that redefine modern
             architecture and living.
