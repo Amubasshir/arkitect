@@ -224,9 +224,9 @@ export default function Header() {
                         </li>
                       )
                     )}
-                    <li className="cursor-pointer font-semibold underline text-white">
+                    {/* <li className="cursor-pointer font-semibold underline text-white">
                       More Templates
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
 

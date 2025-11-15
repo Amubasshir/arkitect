@@ -21,7 +21,7 @@ const SocialIcon = ({ Icon, url }) => (
 
 const LinkList = ({ items }) => (
   <ul className="space-y-3 text-left">
-    {items.map(item => (
+    {items.map((item) => (
       <li key={item}>
         <a
           href={`#${item.toLowerCase().replace(/\s/g, '-')}`}
@@ -148,7 +148,7 @@ export default function Footer() {
 
           {/* Right Column - Navigation */}
           <div
-            className="grid grid-cols-2 
+            className="grid grid-cols-2
            md:grid-rows-1 gap-10 md:gap-12 w-full md:w-2/3"
           >
             {/* PAGES */}
@@ -161,7 +161,7 @@ export default function Footer() {
               </div>
 
               {/* CONTENT with Button */}
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <div className="mb-5  md:mb-24">
                   <LinkList items={navSections.content} />
                 </div>
@@ -187,7 +187,7 @@ export default function Footer() {
                     TEMPLATES
                   </span>
                 </button>
-              </div>
+              </div> */}
             </div>
             {/* UTILITY PAGES */}
             <div>
@@ -202,20 +202,13 @@ export default function Footer() {
         {/* --- BOTTOM SECTION --- */}
         <div className="pt-16 md:pt-32 flex justify-center items-center text-center">
           <p className="text-xs text-gray-500">
-            © Made by{' '}
-            <a
+            © 2025 Arkitect
+            {/* <a
               href="#"
               className="text-white hover:text-gray-300 underline mx-1"
             >
-              Pawel Gola
-            </a>{' '}
-            - Powered by{' '}
-            <a
-              href="#"
-              className="text-white hover:text-gray-300 underline mx-1"
-            >
-              Webflow
-            </a>
+              Arkitect
+            </a> */}
           </p>
         </div>
       </div>
